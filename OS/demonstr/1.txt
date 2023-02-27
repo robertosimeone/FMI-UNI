@@ -1,0 +1,7 @@
+touch foo/{f1,f2,f3}
+find foo -type f -exec cp {} result/  \;
+za debug: find foo -type f -exec echo cp {} result/ \; poslednoto ; moje i s ';'
+moje i result samo, prosto result/ -> taka podskazvame che e direktoriq
+
+-printf -> printim proizvolni atributi na nanmerenite failove
+find /etc/ -type f -printf ' %p %m %s\n'

@@ -1,0 +1,9 @@
+Копирайте /etc/services в home директорията си. Прочетете го с командата cat. (Ако този файл го няма, прочетете с cat произволен текстов файл напр. /etc/passwd)
+
+Solution:
+cp /etc/passwd passwd
+cat passwd
+
+
+na cp kato mu podaden direktoriq  cp /etc/services ~ imeto e po defualt services
+

@@ -1,0 +1,10 @@
+Намерете файловете в /bin, които могат да се четат, пишат и изпълняват от всички.
+
+Solution:
+find /bin -perm /777
+find -L /bin -perm /777
+
+mode tochno tezi perm
+- kato / samo che / ni dava vuzmojnost da gi zadavame s bukvichki /g=rx primerno
+/mode pone tezi
+pri nas nishto ne pravi, zashtoto /bin e symlink
