@@ -1,4 +1,5 @@
 Отпечатайте имената на всички директории в директорията /home.
 Solution:
-ls -d */
+1)ls -d */
+2) find . maxdepth 1 -type d
 
