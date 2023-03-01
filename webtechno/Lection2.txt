@@ -1,0 +1,27 @@
+							---Lection2---
+PHP,Java
+interpretirani - red po red,ako neshto e greshno na nqkoi red ne trugva nishto
+kompiliran - celiq fail,po-bavni ot programistka gledna tochka,ot klientska gledna tochka sa po burzi
+Преносимост, като пишем на c или c++(не съм сигурен) се превежда директно към инстуркции за процесора а другите езици не са така.Ако вземем нещо на c и искаме да го ръннем на Linux  например няма да стане
+Проблем на интегрираните среди - трябва да знаем как се изпозлват инструментите,има бъгове, хубаво е да знаем как се правят нещата без чужда помощ
+XAMPP - cross-platform Apache MySQL PHP Peri
+AWS-Amazon Web Services
+
+Инсталиране на XAAMP:
+apachefriends.org
+8.2.0
+phpwebadmin da go ostavim
+най-важни папки- apache,conf
+start na apache, start na mysql
+root directory of server  - htdocs
+slagame papka  i se pokazva sudurjanieto na direktoriqta
+
+<?php
+code here..
+?>
+Клиент се обръша към сървър, прави заявжки,обработва информация,дава го на клиента и тн
+conf papka:
+Може да си спеняме порта в conf папката
+Ако поорта е зает, тр да можем да го сменяме,примерно ако имаме 2 апачета
+Няма как на един порт да имаме 2 приложения,терминът е socket
+Когато правим линкове, не ги хардкодвай(хардкоднати стойности) защото примерно, ако е на друг комп няма да бачка и т.н, трябва да правим преносими приложения.
