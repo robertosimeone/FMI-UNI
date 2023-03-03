@@ -1,0 +1,39 @@
+									  ---Lection1---
+									Hardware platforms
+1.Ohm's law
+I  = V/R
+Capacito-Nonpolarized,Polazarized(Кондензатор)
+Inductor
+Switch
+LED-Light Emitting Diode
+MicroUsb cabel
+usb c port
+Device manager
+CP2102
+hardware platforms->requisites za arduino 1.8
+NODEMCU 32/DOIT 32
+ESP 32 Dev Module
+PORT con6
+arduino,posle prez librry manager na arduino teglin devkita i posle tiq neshta gore
+board manager,boards manager,gore cukame esp32 i advame	,a instalirame 32 i posle vse edno samo  go izbirame ot nashiq komp(misl)->v linkovete si ima instrukcii
+2.02.2 na esp32 mai
+tqloto na setup se izpulnqva edin put kato go zapalim
+a loop se izpulnqva bezkraino
+ako loop>500ms(времето за изпълнение на loop) , to microcontrolera се ресетва
+delay function чакаме известно време(не е гарантирано че точно еди си колко секунди, но винаги ще бъде повече а не по-малко)
+Serial port -можем да четем и пращаме байтове(кодът който изпълнин се изпълнява на на навия процесор,а чрез serial изпращаме резултагтът обратно към нас през кабела)
+добре да изключим антивирусната
+после serial monitoр за жвидим резултатър
+serial begin-> kolko бита се пращат на секунда.Най-добре да се изпзолзва- 115200L(L  е за long speed)
+В serial montior също същата честота, за да може да се изпраща и приема по едно и също време
+за upload tools,upload speed->скоростта с която ще се качва на устройството ,тва е само по време на качване на програмата 912600
+всеки скеч,който бива ъплоадван маха предишния,скеч е просто setup i loop като ги правиш
+2 ядра, едно ядро е само за служебни функции, а второто е за user-software
+харвърдска архитектура-инстуркциите и данните са разделени(една памет за инструцкии,една за данните),
+в рам паметта са инстуркциите и данните(другата), това позволява някви експлойти
+Архитектурата на паметта - има два блока от 32КБ(това е ram),имаме и флашпаме,между рам паметта и флаш има някъв контролер,СПИ се достъпва флаш паметта
+Като деплойнем бин имиджа се записва в флаш паметта,като тръгва процесора една част от кода го слага в 32КБ памет(те са пин и динамични)(онова преди малко не е контролер а MMU) memory management unit
+Как бачка примерно malloc(като заделяме памет)
+ако кода е прекалено много или примерно повече от 32КБ в кода който е динамичен , то отива  и бърква в флаш паметта и затова се получават по-големи забавяния(и разкарва няква част от тези 32КБ заето от динамичната)
+можр да избираме и флаш сизе,после тр да ипереб partition schema - > 
+
