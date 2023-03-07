@@ -1,0 +1,8 @@
+SOlution:
+find /etc -type f -perm -444  -exec cp {} ~/myetc \;-tuk iska pone edno a ne vsichkite
+cp $(find /etc -type f -perm -444)
+ВИнаги може да дебъгваме като лсожим echo otpred
+като правим събститюшън с $ шела разделя с спейсче всеки един резултат
+tova s naklonenata cherta oznaxchava pone edin
+a tovas -mode e pone vsichki deto sme kazali sa setnati
+find -name passwd ->tursi failove s ime passwd(mislq che pone tova sudurja)

@@ -1,0 +1,4 @@
+find /etc -type f -perm -a=r -exec cp {} myetc \;
+shuf на входа приема текст и го разбърква
+tar -c -f c_start.tar myetc/c*
+tar -c -f c_trt.tar $(find my_etc -name 'c*' -type f)

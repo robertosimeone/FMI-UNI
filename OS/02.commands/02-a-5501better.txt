@@ -1,0 +1,2 @@
+Името на най-големия файл който е с размер рпод 512
+basename '$(find ~ -type f -size -512c -printf '%s %p\n' | sort -n | tail -n 1 | cut -d ' ' -f 2-)'

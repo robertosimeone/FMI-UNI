@@ -1,0 +1,5 @@
+Извадете обикновените файлове по-големи от 42 байта в home директорията ви
+find ~ -type f -size +42c
+find ~ -type f -size +42c -printf '%s %p\n
+mmin e за минути§:'
+
