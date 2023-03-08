@@ -1,4 +1,4 @@
-<h1 style = "color:red;text-align:center"> Exercises</h1>
+# Exercises
 ## 02-a-5401.txt
 - **Условие:**<br/>
 Изведете само първите 5 реда от /etc/services
