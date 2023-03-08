@@ -1,11 +1,8 @@
 # Exercises
 ## 02-a-5401.txt
 - Условие
-```bash
-head -n 5 /etc/services
-```
-```
-robi
+```{r, engine='bash', some_function}
+wc -l en_US.twitter.txt
 ```
 
 
