@@ -1,4 +1,0 @@
-				  --Lection3---
-				Синтаксис на PHP
-			  PHP - Hypertext Preprocessor
-
