@@ -1,0 +1,20 @@
+									Lab 1 - 10.03.2023
+Христо Христов
+id@yaht.net
+http:/rmi.yacht.net
+Много виртуални машини които в даден момент решават една задача или много задачи - > single at time,many at time
+памет,как се адресира, колко ядра имат - > Знания от карх ram, bytes,core(s),cache,L1 L2 L3
+OSI,socket(s)BPM
+\API/
+ОС,glue language
+task,proces,exec *,fork()
+\api/
+htop
+Java
+Gnu Linux + Bash
+parallel concurent(мисля че това е начин на рънване на програмите)
+distributed
+POSIX
+C ANSI
+UNIX->Linux
+
