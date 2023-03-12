@@ -72,11 +72,11 @@ wc -cml /etc/passwd # всички наведнъж
 - **Решение:**
 ```bash
 1) head -n 12 /etc/passwd
-2) head -1 /etc/passwd | head -c 26
+2) head -1 /etc/passwd | head -c 26 # с cut мисля че е по-смислено
 3) head -n -4 /etc/passwd
 4) tail -n 17 /etc/passwd
 5) head -n 151 /etc/passwd | tail -n 1
-6) head -n 13 /etc/passwd | tail -n 1 | rev | head -c 4 | rev 
+6) head -n 13 /etc/passwd | tail -n 1 | rev | head -c 4 | rev # с cut мисля че е по-смислено
 
 ```
 ## 03-a-3000.txt
@@ -118,18 +118,23 @@ cat /etc/passwd | cut -d ':' -f 1 | tr a-z A-Z
 Изведете *само* реда, който се намира 2 реда преди реда, съдържащ информация за вашия потребител.
 - **Решение:**
 ```bash
-
+1)cat /etc/passwd | grep "$(id -un)"
+2)cat /etc/passwd | grep -B 2  "$(id -un)"
+3)cat /etc/passwd | grep -B 2 -A 3 "$(id -un)"
+4)cat /etc/passwd | grep -B 2  "$(id -un)" | head -n 1 
 ```
-## 
+## 03-a-5001.txt
 - **Условие:**<br/>
+Изведете колко потребители не изпозват /bin/bash за login shell според /etc/passwd
 
+(hint: 'man 5 passwd' за информация какъв е форматът на /etc/passwd)
 - **Решение:**
 ```bash
-
+cat /etc/passwd | grep -v 'bin/bash' | wc -l
 ```
-## 
+## 03-a-5002.txt
 - **Условие:**<br/>
-
+Изведете само имената на хората с второ име по-дълго от 6 (>6) символа според /etc/passwd
 - **Решение:**
 ```bash
 
