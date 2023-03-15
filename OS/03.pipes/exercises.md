@@ -333,21 +333,20 @@ cat /etc/passwd | grep -o '[^a]' | sort | uniq -c | sort -n
 - **Решение:**
 ```bash
 cat /etc/passwd | cut -d ':' -f 5 | cut -d , -f1 | grep -o '[^ ]' | sort | uniq -c | sort
-
 ```
 ## 03-b-5400.txt
 - **Условие:**<br/>
 Отпечатайте всички редове на файла /etc/passwd, които не съдържат символния низ 'ов'.
 - **Решение:**
 ```bash
-
+egrep -v 'ов' /etc/passwd | wc -l
 ```
-## 
+## 03-b-6100.txt
 - **Условие:**<br/>
-
+Отпечатайте последната цифра на UID на всички редове между 28-ми и 46-ред в /etc/passwd.
 - **Решение:**
 ```bash
-
+awk -F ':' '{if(NR>=28 && NR<=46){print $3}}' /etc/passwd | rev | cut -c 1
 ```
 ## 
 - **Условие:**<br/>
