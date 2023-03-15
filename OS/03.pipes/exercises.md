@@ -137,27 +137,75 @@ cat /etc/passwd | grep -v 'bin/bash' | wc -l
 Изведете само имената на хората с второ име по-дълго от 6 (>6) символа според /etc/passwd
 - **Решение:**
 ```bash
-
+1)cat /etc/passwd | cut -d ':' -f 5 | cut -d , -f 1 | awk -F ' ' 'length($2)>12 {print $1}' # 12 защото имената са на български,а един символ от бг азбуката се брои за 2 байта
+2)cat /etc/passwd | cut -d ':' -f 5 | cut -d , -f 1 | awk -F ' ' 'length($2)>6 {print $1}' # ако имената бяха на латиница
 ```
-## 
+## 03-a-5003.txt
 - **Условие:**<br/>
-
+Изведете имената на хората с второ име по-късо от 8 (<=7) символа според /etc/passwd // !(>7) = ?
 - **Решение:**
 ```bash
-
+cat /etc/passwd | cut -d ':' -f 5 | cut -d , -f 1 | awk -F ' ' 'length($2)<16 {print $1}'
 ```
-## 
+## 03-a-5004.txt
 - **Условие:**<br/>
-
+Изведете целите редове от /etc/passwd за хората от 03-a-5003
 - **Решение:**
 ```bash
-
+cat /etc/passwd | awk -F ":|,| " 'length($6)<16 {print $0}'
 ```
-## 
+## 03-a-6000.txt
 - **Условие:**<br/>
+Копирайте <РЕПО>/exercises/data/emp.data във вашата home директория.
+Посредством awk, използвайки копирания файл за входнни данни, изведете:
 
+- 1)общия брой редове
+- 2)третия ред
+- 3)последното поле от всеки ред
+- 4)последното поле на последния ред
+- 5)всеки ред, който има повече от 4 полета
+- 6)всеки ред, чието последно поле е по-голямо от 4
+- 7)общия брой полета във всички редове
+- 8)броя редове, в които се среща низът Beth
+- 9)най-голямото трето поле и редът, който го съдържа
+- 10)всеки ред, който има поне едно поле
+- 11)всеки ред, който има повече от 17 знака
+- 12)броя на полетата във всеки ред и самият ред
+- 13)първите две полета от всеки ред, с разменени места
+- 14)всеки ред така, че първите две полета да са с разменени места
+- 15)всеки ред така, че на мястото на първото поле да има номер на реда
+- 16)всеки ред без второто поле
+- 17)за всеки ред, сумата от второ и трето поле
+- 18)сумата на второ и трето поле от всеки ред
 - **Решение:**
 ```bash
+1.1)awk 'END {print NR}' emp.data
+1.2)awk 'BEGIN{i = 0} {i++} END {print i}' emp.data
+2.1)awk 'BEGIN{i = 0} {i++} i == 3 {print $0}' emp.data
+2.2)awk 'NR == 3 {print $0}' emp.data
+3)awk '{print $NF}' emp.data
+4)awk 'END {print $NF}' emp.data
+5)awk 'NF>4{print $0}' emp.data
+6)awk '$NF>4{print $0}' emp.data
+7)awk 'BEGIN {i=0} {i+=NF} END{ print i}' emp.data
+8)awk '/Beth/ {print $0} ' emp.data
+9)awk 'BEGIN{max = -10;current} $NF>max{max=$NF;current=$0}END{printf "%s :  %s\n",max,current}' emp.data
+10)awk 'NF>0{print $0}' emp.data
+11)awk 'length($R)>17' emp.data
+12.1)awk '{print NF,":",$0}' emp.data
+12.2)awk '{printf "%u : %s\n",NF,$0}' emp.data
+13)awk '{print $2,$1}' emp.data # тук може да подадем OFS(с това се разделят колонките,тоест -v OFS='\t')
+14)awk '{printf "%-6.2f %-6s   ",$2,$1;for(i=3;i<=NF;i++) print $i}' emp.data
+15)awk '{printf"%d %s\n",FNR,$0}' emp.data
+16.1)awk '{for(i=1;i<=NF;i++){if(i!=2){printf "%s",$i};if(i==NF){printf "\n"}else printf "   "}}' testcol # малко sloppy
+16.2)awk -v OFS='\t' '{printf "%s%s",$1,OFS}; {for(i=3; i<=NF; i++){printf "%i",$i}}; {print ""}' testcol # този начин не работи ако имаме повече от 3 колони , защото 3тата и всички друго поред се долепват една до друга
+16.3)awk -v OFS='\t' '{$2=""; print $0 }' emp.data # това е друг як начин
+17)awk '{print $2+$3}' emp.data
+18.1)awk 'BEGIN{SUM=0}{sum = $2+$3;SUM+=sum}END{print SUM}' emp.data
+18.2)awk -v SUM=0 '{SUM += ($2 + $3)} END {print SUM}' emp.data
+
+
+
 
 ```
 ## 

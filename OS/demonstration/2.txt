@@ -1,0 +1,19 @@
+				All code written from the 4th exercise
+
+tail -n +1 /srv/fmi-os/exercises/03.pipes/*.tx
+при един файл си действа както си трябва
+иначе ако сложим повече от един файл си изкарва и името на файла за да знаем и кой файл гледаме
+##03-b-0300.txt##
+1)cat /etc/passwd | awk -F : -v current_user = $(whoami) '$1 == current_user {print $4}'
+2) cat .... | grep "^$(whoami):" | cut -d : -f 4
+whatis - > whatis regex
+head -c 26 -> purvite 26 simvola ot faila (za zad 03-a-2000.txt _> cut ne e dobre zashtoto ako reda beshe po maluk ot 26 simvola shteshe da izvede celiq purvi red a ne 26 simvola ot fjala
+cat /etc/servoces | grep '#' | wc -l
+cat /etc/services | grep '^#' | wc -l
+03-b-3500.txt
+file /bin/* | grep 'shell' | wc -l
+find /bin -type f -exec file {} \; | grep...
+ne dava nishto zashtoto /bin e symlink, tr da mu dadem flag -L
+find / -maxddepth 3 -not -readable -type d 2 > /dev/null
+-not pravi taka che sledvashtoto koeto sme napisali da e obratnoto toest -not -readable e da ne e readable
+vimtutor
