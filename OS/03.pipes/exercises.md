@@ -204,30 +204,34 @@ cat /etc/passwd | awk -F ":|,| " 'length($6)<16 {print $0}'
 18.1)awk 'BEGIN{SUM=0}{sum = $2+$3;SUM+=sum}END{print SUM}' emp.data
 18.2)awk -v SUM=0 '{SUM += ($2 + $3)} END {print SUM}' emp.data
 ```
-## 
+## 03-b-0300.txt
 - **Условие:**<br/>
-
+Намерете само Group ID-то си от файлa /etc/passwd.
 - **Решение:**
 ```bash
-
+1)cat /etc/passwd | awk -F : -v current_user = $(whoami) '$1 == current_user {print $4}'
+2)cat /etc/passwd | awk -F : -v current_user=$(id -un) '$1 == current_user {print $4}'
+# горните 2 ще мачнат и неща които не започват с id-to на текущия user
+3)cat /etc/passwd | grep "^$(whoami):" | cut -d : -f 4
 ```
-## 
+## 03-b-3400.txt
 - **Условие:**<br/>
-
+Колко коментара има във файла /etc/services ? Коментарите се маркират със символа #, след който всеки символ на реда се счита за коментар.
 - **Решение:**
 ```bash
-
+1)grep '#' /etc/services | wc -l 
 ```
-## 
+## 03-b-3500.txt
 - **Условие:**<br/>
-
+Колко файлове в /bin са 'shell script'-oве? (Колко файлове в дадена директория са ASCII text?)
 - **Решение:**
 ```bash
-
+1)find -L /bin -mindepth 1 -maxdepth 1 -type f -exec file {} \; | grep 'shell' | wc -l
+2)file /bin/* | grep 'shell' | wc -l
 ```
-## 
+## 03-b-3600.txt
 - **Условие:**<br/>
-
+Направете списък с директориите на вашата файлова система, до които нямате достъп. Понеже файловата система може да е много голяма, търсете до 3 нива на дълбочина.
 - **Решение:**
 ```bash
 
