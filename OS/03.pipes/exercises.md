@@ -203,10 +203,6 @@ cat /etc/passwd | awk -F ":|,| " 'length($6)<16 {print $0}'
 17)awk '{print $2+$3}' emp.data
 18.1)awk 'BEGIN{SUM=0}{sum = $2+$3;SUM+=sum}END{print SUM}' emp.data
 18.2)awk -v SUM=0 '{SUM += ($2 + $3)} END {print SUM}' emp.data
-
-
-
-
 ```
 ## 
 - **Условие:**<br/>
