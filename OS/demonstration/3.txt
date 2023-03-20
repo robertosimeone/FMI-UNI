@@ -1,0 +1,49 @@
+				Demonstration 20.03.2023
+inplace zamqne se pravi sus sed -i
+sed -i /s/a/A/g' foo.txt
+sed -i -e  s/a/A/g' -e 's/b/B/g
+mv -f
+sed 'y/abc/ABC/g' foo.tx
+sed -i 'y/abcdef..../ABCDE.../g' izbroqvame vsichkite
+tr ne pravi inplace
+
+
+				Процеси
+ps -e информация са всички процеси
+ps -i <potrebitel> vsichki procesi na daden potrebitel
+ps -o pid samo pidovete printi, toest -o ni pozvolqva da kazvame kakwo da printim
+ps -u human -o pid,comm,ppid,time=
+ako slojim ravno sled nqkoi kolonka to nqma da izleze samoto ime na kolonka
+a ako slojim =<neshto si> imeto na kolonkata shte bude neshto si
+04-5000.txt
+export LC_TIME='%y-%%m-%d-
+ps -e 0o start=,comm= | sed 's/^ 
+ps -e --sort=start -o comm | tail -n 10
+
+5000
+ps -e -g root (filtrira po root)' rss= | awk '{sum++$END{print sum}}'
+echo '1+5' | bc
+ps -e -o comm,user | grep "^vim 
+6200
+"
+who | awk '{print $1}' | xargs -I @ grep -v '@:' 
+ps -e 
+ne vursh rabota s tova -v zashtoto za vseki user vika vsichki bez nego
+
+angel si gi zapisva v nqkvi failove po nqkwa prichina
+comm file1 file2 posle se polzva
+comm -1 -3 <)
+grep -v "$(who|cut -d ' ' -f 1)"
+ normalni regex
+simvola za nov red se priema za ili
+
+7000
+sed -E??
+ps -e -g root -o rss=| sed 's/^ //g' | awk 'BEGIN{sum=0}if...->awk se opravq s white space
+moje da ne izpoklzvame gore sed
+i edin counter da dobavim gore
+-e i -g ne bachkat zaedno , taka samo izlizat vs procesi zaradi -e 
+ako nqma procesi se poluchava divisio by zero
+moje v END da dobavim if 0> if nr==0 ...
+' 
+
