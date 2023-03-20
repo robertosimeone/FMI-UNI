@@ -565,36 +565,36 @@ find . -mindepth 1 -maxdepth 1 -perm "$(find /etc -mindepth 1 -printf "%m\t%s\n"
 вторията има само невалидни. Филтрирайте всички адреси, така че да останат
 само валидните. Колко кратък регулярен израз можете да направите за целта?
 
-Валидни email адреси (12 на брой):
-email@example.com
-firstname.lastname@example.com
-email@subdomain.example.com
-email@123.123.123.123
-1234567890@example.com
-email@example-one.com
-_______@example.com
-email@example.name
-email@example.museum
-email@example.co.jp
-firstname-lastname@example.com
-unusually.long.long.name@example.com
+Валидни email адреси (12 на брой):<br/>
+email@example.com<br/>
+firstname.lastname@example.com<br/>
+email@subdomain.example.com<br/>
+email@123.123.123.123<br/>
+1234567890@example.com<br/>
+email@example-one.com<br/>
+_______@example.com<br/>
+email@example.name<br/>
+email@example.museum<br/>
+email@example.co.jp<br/>
+firstname-lastname@example.com<br/>
+unusually.long.long.name@example.com<br/>
 
-Невалидни email адреси:
-#@%^%#$@#$@#.com
-@example.com
-myemail
-Joe Smith <email@example.com>
-email.example.com
-email@example@example.com
-.email@example.com
-email.@example.com
-email..email@example.com
-email@-example.com
-email@example..com
-Abc..123@example.com
-(),:;<>[\]@example.com
-just"not"right@example.com
-this\ is"really"not\allowed@example.com
+Невалидни email адреси:<br/>
+#@%^%#$@#$@#.com<br/>
+@example.com<br/>
+myemail<br/>
+Joe Smith <email@example.com><br/>
+email.example.com<br/>
+email@example@example.com<br/>
+.email@example.com<br/>
+email.@example.com<br/>
+email..email@example.com<br/>
+email@-example.com<br/>
+email@example..com<br/>
+Abc..123@example.com<br/>
+(),:;<>[\]@example.com<br/>
+just"not"right@example.com<br/>
+this\ is"really"not\allowed@example.com<br/>
 - **Решение:**
 ```bash
     cat valid invalid | egrep --color "^([a-zA-Z0-9_]+(\.|\-)?[a-zA-Z0-9_]+)+@([a-zA-Z0-9]+(\.|\-)[a-zA-Z0-9]+)+$"
