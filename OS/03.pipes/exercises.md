@@ -448,40 +448,215 @@ Hint: /etc/passwd
 файла и времето (unix time) на последната промяна.
 - **Решение:**
 ```bash
-find . -mindepth 1 -mmin -15 # to be continued tomorrow
+find . -mindepth 1 -mmin -15 -printf "%p\t%T@\n" > eternity
 ```
-## 
+## 03-b-9050.txt
 - **Условие:**<br/>
+Копирайте файл <РЕПО>/exercises/data/population.csv във вашата home директория.
+- **Решение:**
+```bash
+cp /srv/fmi-os/exercises/data/population.csv ~
+```
+## 03-b-9051.txt
+- **Условие:**<br/>
+Използвайки файл population.csv, намерете колко е общото население на света
+през 2008 година. А през 2016?
+- **Решение:**
+```bash
+awk -F ',' -v pop_2008=0 -v pop_2016=0 '$3==2008{pop_2008+=$4}$3==2016{pop_2016+=$4}END{print pop_2008,pop_2016}' population.csv
+```
+## 03-b-9052.txt
+- **Условие:**<br/>
+Използвайки файл population.csv, намерете през коя година в България има най-много население.
+- **Решение:**
+```bash
+grep 'Bulgaria' population.csv | awk -F ',' -v max_pop=-1 -v max_pop_year=-1 'max_pop<=$4{max_pop=$4;max_pop_year=$3}END{print max_pop_year,":",max_pop}'
 
+```
+## 03-b-9053.txt
+- **Условие:**<br/>
+Използвайки файл population.csv, намерете коя държава има най-много население през 2016. А коя е с най-малко население?
+(Hint: Погледнете имената на държавите)
+- **Решение:**
+```bash
+grep ',2016,' population.csv | sed 's/, / /' | awk -F ',' -v maxpop=-1 -v maxpopc='' -v minpopc=0 -v minpopc='' '$4>=maxpop{maxpop=$4;maxpopc=$1}minpop==0{minpop=$4;minpopc=$1}minpop>=$4{minpop=$4;minpopc=$1}END{printf"MIN POPULATION %s : %d\nMAX POPULATION %s : %d\n",minpopc,minpop,maxpopc,maxpop}' # излиза проблем ако примерно сложиш някоя промелива да е равна на -1 и после проверяваш в awk-a za var==-1(с 0 си работи ок)
+#мсиля че на всички задачи нагоре тр да се направи командата sed заради добавените "," в имената
+```
+## 03-b-9054.txt
+- **Условие:**<br/>
+Използвайки файл population.csv, намерете коя държава е на 42-ро място по
+население през 1969. Колко е населението й през тази година?
+- **Решение:**
+```bash
+grep ',1969,' population.csv | sed 's/, / /' | sort -t ',' -nr -k 4 | head -n 41 | tail -n 1
+```
+## 03-b-9100.txt
+- **Условие:**<br/>
+В home директорията си изпълнете командата
+curl -o songs.tar.gz "http://fangorn.uni-sofia.bg/misc/songs.tar.gz"
 - **Решение:**
 ```bash
 
 ```
-## 
+## 03-b-9101.txt
 - **Условие:**<br/>
-
+Да се разархивира архивът songs.tar.gz в директория songs във вашата home директория
 - **Решение:**
 ```bash
-
+uncompress songs.tar.gz
+tar -xf songs.tar -C songs/
 ```
-## 
+## 03-b-9102.txt
 - **Условие:**<br/>
-
+Да се изведат само имената на песните.
 - **Решение:**
 ```bash
-
+1)find . -mindepth 1 -printf "%f\n" | sed 's/.*-//' | sed 's/(.*//'
+2)find . -type f -name '*.ogg' | awk -F/ '{print $2}' | awk -F ' \\(' '{print $1}'
+3)find . -mindepth 1 -printf "%f\n" | awk -F '\-|\\(' '{print $2}'
 ```
-## 
+## 03-b-9103.txt
 - **Условие:**<br/>
-
+Имената на песните да се направят с малки букви, да се заменят спейсовете с
+долни черти и да се сортират.
 - **Решение:**
 ```bash
-
+find . -mindepth 1 -printf "%f\n" | awk -F '-|\\(' '{$2=tolower($2);print $0}' # не е довършено,по някаква причина tolower($2) цака нещата и делимитерите изчезват - '-' и '(' -> това е ако искаме да изкараме целия ред с малки букви на иманта
+1)find songs -mindepth 1 -printf "%f\n" | awk -F '-|\\(' '{$2=tolower($2);print $2}' | cut -d ' ' -f 2- | sed 's/ /_/g' | sed 's/_$//'
+2)find songs -mindepth 1 -printf "%f\n" | awk -F '-|\\(' '{$2=tolower($2);print $2}' | sed 's/^ //' | sed 's/ /_/g' | sed 's/_$//'
 ```
-## 
+## 03-b-9104.txt
 - **Условие:**<br/>
-
+Да се изведат всички албуми, сортирани по година.
 - **Решение:**
 ```bash
+find songs -mindepth 1 -printf "%f\n" | awk -F '\\(|\\)' '{print $2}' | sort -t ',' -n -k 2 | uniq # на този пример отново,ако сложим "" вместо '' не излиза нищо,а с ''си бачка
+```
+## 03-b-9105.txt
+- **Условие:**<br/>
+Да се преброят/изведат само песните на Beatles и Pink.
+- **Решение:** 
+```bash
+find songs -mindepth 1 -printf "%f\n" | egrep 'Beatles|Pink [^F]' | awk -F '-' -v beatc=0 -v pinkc=0 '{print $0}$1=="Beatles " {beatc+=1}$1=="Pink "{pinkc+=1}END{printf"Beatles songs:%d\nPink songs:%d\n",beatc,pinkc}'
+# има примери където се ескейпва | -> grep 'Beatles\|Pink' защо се ескепва
+```
+## 03-b-9106.txt
+- **Условие:**<br/>
+Да се направят директории с имената на уникалните групи. За улеснение, имената
+от две думи да се напишат слято:
 
+Beatles, PinkFloyd, Madness
+- **Решение:**
+```bash
+mkdir $(find songs -mindepth 1 -printf "%f\n" | awk -F '-' '{print $1}' | tr -d ' ' | sort | uniq)
+```
+## 03-b-9200.txt
+- **Условие:**<br/>
+Напишете серия от команди, които извеждат детайли за файловете и директориите в
+текущата директория, които имат същите права за достъп както най-големият файл
+в /etc директорията.
+- **Решение:**
+```bash
+find . -mindepth 1 -maxdepth 1 -perm "$(find /etc -mindepth 1 -printf "%m\t%s\n" 2>/dev/null | sort -nrk 2 | head -n 1 | cut -f 1)"
+```
+## 03-b-9300.txt
+- **Условие:**<br/>
+Дадени са ви 2 списъка с email адреси - първият има 12 валидни адреса, а
+вторията има само невалидни. Филтрирайте всички адреси, така че да останат
+само валидните. Колко кратък регулярен израз можете да направите за целта?
+
+Валидни email адреси (12 на брой):
+email@example.com
+firstname.lastname@example.com
+email@subdomain.example.com
+email@123.123.123.123
+1234567890@example.com
+email@example-one.com
+_______@example.com
+email@example.name
+email@example.museum
+email@example.co.jp
+firstname-lastname@example.com
+unusually.long.long.name@example.com
+
+Невалидни email адреси:
+#@%^%#$@#$@#.com
+@example.com
+myemail
+Joe Smith <email@example.com>
+email.example.com
+email@example@example.com
+.email@example.com
+email.@example.com
+email..email@example.com
+email@-example.com
+email@example..com
+Abc..123@example.com
+(),:;<>[\]@example.com
+just"not"right@example.com
+this\ is"really"not\allowed@example.com
+- **Решение:**
+```bash
+    cat valid invalid | egrep --color "^([a-zA-Z0-9_]+(\.|\-)?[a-zA-Z0-9_]+)+@([a-zA-Z0-9]+(\.|\-)[a-zA-Z0-9]+)+$"
+```
+## 03-b-9400.txt
+- **Условие:**<br/>
+Посредством awk, използвайки emp.data (от 03-a-6000.txt) за входнни данни,
+изведете:
+
+- всеки ред, като полетата са в обратен ред
+
+(Разгледайте for цикли в awk)
+- **Решение:**
+```bash
+1)awk '{for(i=NF;i>=1;i--){if(i==1){print $i}else{printf "%s\t",$i}}}' emp.data
+2)awk '{for (i = NF; i>0; i--){printf "%s\t",$i}}{printf "\n"}' emp.data
+#това е яко.демек се изпълнява вс в първите кавички и след като се изпълни всичко там се влиза във вторите където има друго условие
+```
+## 03-b-9500.txt
+- **Условие:**<br/>
+Копирайте <РЕПО>/exercises/data/ssa-input.txt във вашата home директория.
+Общият вид на файла е:
+
+- заглавна част:
+	Smart Array P440ar in Slot 0 (Embedded)
+
+- една или повече секции за масиви:
+	Array A
+	Array B
+	...
+	като буквата (A, B, ...) е името на масива
+
+- във всяка таква секция има една или повече подсекции за дискове:
+	physicaldrive 2I:0:5
+	physicaldrive 2I:0:6
+	...
+
+	като 2I:0:5 е името на диска
+
+- във всяка подсекция за диск има множество параметри във вида:
+	key name: value
+	като за нас са интересни само:
+
+		Current Temperature (C): 35
+		Maximum Temperature (C): 36
+
+Напишете поредица от команди която обработва файл в този формат, и генерира
+следният изход:
+
+A-2I:0:5 35 36
+A-2I:0:6 34 35
+B-1I:1:1 35 50
+B-1I:1:2 35 49
+
+x-yyyyyy zz ww
+
+където:
+	- x е името на масива
+	- yyyyyy е името на диска
+	- zz е current temperature
+	- ww е max temperature
+- **Решение:**
+```bash
+cat ssa-input.txt  | egrep --color "Array|physicaldrive|Current Temperature|Maximum Temperature" | egrep --color -v "Smart" | sed 's/(C)//g' | tr -s " " | sed 's/t T/tT/g' | sed 's/m T/mT/g' | cut -d " " -f 2- | awk -F " " -v ca="" -v pd="" -v ct=0 -v mt=0 '$1=="Array"{ca=$2}$1=="physicaldrive"{pd=$2}$1=="CurrentTemperature"{ct=$3}$1=="MaximumTemperature"{mt=$3;printf "%s-%s %d %d\n",ca,pd,ct,mt}'
 ```
