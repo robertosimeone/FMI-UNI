@@ -1,0 +1,13 @@
+1)V usloviqta navsqkude pishe faila .bash_profile a pri men ima samo .profile no ne i .bash_profile
+2)razlika mejdu "${@}" i ${@}
+3) da pokaje otnovo onova s vim !: commanda deto outputa izliza v vim faila
+4) why always "${*}" is used and not "${@}"
+5) primer za >() -> koga se izpolzwaw tova neshto
+6) 334 слайд - > какво е това $ и защо няма информация за -d в man read
+
+
+
+
+
+
+
