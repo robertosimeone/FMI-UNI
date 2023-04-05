@@ -1,0 +1,37 @@
+									Lab-04.04.20
+							PHP
+
+ping <site>(google.bg)
+Install XAAMP
+->apachefriends.org->tr da se sloji security exceps(ne sa si konfigurirali nqkuv binary file) -> settings->aprivacy and security->open anyway(ako ne iska samo da si vuveda parola)->nextnextnext->
+slagame vs v default papka ot defaultana instalaciq na xaamp(ako iskame)
+Change Ports:
+-> open conf file(ot config)->
+
+PHP syntax:
+скриптов език
+php може да се използва и за други неща, не само за web(personal homepage е било в началото сега е друго)
+ако не сме записали нищо горе в браузура, index.html се зарежда по default
+Listen Port-> да се смени примерно на 8080
+частен ип,публичен ип,локалхост
+. -> оператор за конкатениране
+<?php
+echo "Hellow world:" . (3+3);
+php>
+Може пхп да съществува самостоятелно , може и да е вграден в html,
+Moже и html в php -> echo "whole html" -> tupoto na tova e che nqma highlight, i nqma autocompletion
+Най-добре е пхп в хтмл а не хтмл в пхп
+'' statichen niz->edno kum edno kakvoto ima v nego
+a "" se interpretira toest $neshto si e promenliva
+; e za razdelqne na statementi toest ako izpusnem an posledniq raboti no e hubavo i da se pishe
+echo "myage"."<br/>
+null se interpretira do prazniq string
+application->cookies->sesion identificator
+бисквитките се ползват за потребителски предпочитания, които не са свързани със сигурността->примерно за настройките на шрифта
+В проекта тр да имаме хеширане винаги
+PBKDF2
+argon2
+argoni ,argond,argonid
+многонишково програмиране
+side channel - страничен канал
+
