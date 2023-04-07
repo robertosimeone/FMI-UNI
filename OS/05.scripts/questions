@@ -4,10 +4,28 @@
 4) why always "${*}" is used and not "${@}"
 5) primer za >() -> koga se izpolzwaw tova neshto
 6) 334 слайд - > какво е това $ и защо няма информация за -d в man read
-
-
-
-
-
+7) [[-d -f $direcottyr $file]] -> tova samo v tekushtata papka li proverqva
+8) how exactly do we increment variables in a shell script
+9)#!/bin/bash
+  2 file="${1}"
+  3 max_nest=0
+  4 nest_count=0
+  5 grep -o "[{}]" "${file}" | while read symbol; do
+  6 echo "cycle"
+  7 if [[ "${symbol}" == '{' ]]; then
+  8     echo "inif"
+  9     nest_count=$(($nest_count + 1))
+ 10     echo "nest_count is : ${nest_count}"
+ 11 fi
+ 12 done
+ 13 echo "${nest_count}"
+ 14 echo "max nest is ${max_nest}"
+-> tova da ne bi dane raboti zashtoto dqsnata strana na | se izpulnqwa v subshell i tam ne se pomnqt promenlivite
+10) 1 #!/bin/bash
+  2 while ! grep -q "${1}" <(who | tr -s ' ' | cut -d ' ' -f 1 ); do
+  3     sleep 1
+  4 done
+  5 echo "User ${1} has logged in"
+-> tov dobur sintaksis li e !komanda
 
 

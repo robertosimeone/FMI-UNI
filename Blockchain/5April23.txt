@@ -1,0 +1,14 @@
+ima samo edin konstruktor i tr da e markiran kato public
+stringove ->бавна операция,няма вградена операция, solidity не може да се опраи сам с тях така че го превръщаме към серия от байтове и после гог хешираме за да се оправим с тях(да ги сравним)
+за маповете->не може да се итерират по елементите на мап,всеки път като имаме мап, тр да иамме и друга структура която да ни пази ключовете,мап няма size
+видове памет->memory,storage,stack
+storage-ledger
+stack-samo promenlivi,koito jiveqt dokato jivee funckiqta
+memory referentni tipove,za po slojni tipove(po-slojen stack)-pak ne vlizat v ledgera
+cikli-слагаме цикъл само ако сме сигурни в логиката,ако искаме да има цикъл тр да се погрижи че цикъла
+contract B is Specifics{}->B nasledqwa SPecifics(mnojestveno nasledqwane ne se izpolzwa mnogo,po-losho ot loopovete daje)
+po default state-fieldovete sa internal
+Reentrnacy A->B->C->A....
+contract C is A,B...
+event AGotDivided(uint256'->sushtiq tip kato stoinostta koqti ni vulnuva' resultA);
+emit AGotDIvided(a/3)-> tova vuv vunkciqta koqto deli a
