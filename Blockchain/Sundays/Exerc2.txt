@@ -1,0 +1,19 @@
+
+08.04.2023
+smart contract	- има property .balance което пази целия баланс, но това не е достатъчно(ако искаме да знаем кой колко крипто е пратил примнерно)
+return address(this).balance -> кастваме this(контракта) към address
+yellow paper
+msg
+tx
+msg.sender
+msg.value -> sumata koqto suotvetniq chovek prashta
+msg.data -> drugo osven money izprateni kum smart contracta
+zashto addressa da e payable -> защита за нас , за да сме сигурни че тук плащаме пари
+може горе в дефиницията да сложим payable moje i dolu payable(_аддресс).
+po dobra praktika e na samoto transferirane toest payable(_address)
+fallback() external payable{
+}
+trnasfer e mn safe funckiq i ogranichava kolko gas moje da se izvikva v drugiq contract
+emit GasLeft(gasleft()); gaslefeft() e kato statichna funkciq
+2254
+receive() external payable{}
