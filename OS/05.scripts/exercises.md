@@ -296,14 +296,78 @@ $ ./nicenumber.sh 7632223 ,
 7,632,223
 - **Решение:**
 ```bash
+#!/bin/bash
+  2 number="${1}"
+  3 if [[ -z "${2}" ]]; then
+  4     separator=" "
+  5 else
+  6     separator="${2}"
+  7 fi
+  8 newnumber="$(echo "${number}" | rev)"
+  9 newone="$(echo "${newnumber}" | sed -E 's/([0-9]{3})/\1 /g' | tr ' ' "$separator" | sed -E 's/[, ]$//g' | rev)"
+ 10 echo "$newone" 
+
+ # second solution
+   1 #!/bin/bash
+  2 number="${1}"
+  3 if [[ -z "${2}" ]]; then
+  4     separator=" "
+  5 else
+  6     separator="${2}"
+  7 fi
+  8 len=$(echo ${number} | awk -F "" -v num="${number}" 'BEGIN{len=length(num);print len}')
+  9 remainder=$((len%3))
+ 10 echo "${remainder}"
+ 11 first=""
+ 12 annumber=""
+ 13 from=0
+ 14 if [[ $len -gt 3 ]]; then
+ 15     if [[ ! $remainder -eq 0 ]]; then
+ 16         new="${number: 0 : $remainder}"
+ 17         annumber="$first$new$separator"
+ 18         len=$((len-remainder))
+ 19
+ 20         fi
+ 21         cycles=$((len/3))
+ 22         for((i=$remainder,cc=1;i<$len,cc<=$cycles;i+=3,cc++)); do
+ 23             if [[ $cc -eq ${cycles} ]]; then
+ 24                 echo "In last if"
+ 25                 symbols="${number: $i: 3}"
+ 26                 annumber="$annumber$symbols"
+ 27             else
+ 28             echo "In else"
+ 29             symbols="${number: $i: 3}"
+ 30             annumber="$annumber$symbols$separator"
+ 31             fi
+ 32         done
+ 33 else
+ 34     echo "Not greater than 3"
+ 35     annumber="$number"
+ 36 fi
+ 37 echo -e "$annumber"
 ```
 ## 05-b-4800.txt
 - **Условие:**<br/>
-Да се напише shell скрипт, който приема файл и директория. Скриптът проверява в подадената директория и нейните под-директории дали съществува копие на подадения файл и отпечатва имената на намерените копия, ако съществуват такива.
+Да се напише shell скрипт, който приема файл и директория. Скриптът проверява в подадената директория и нейните под-директории дали съществува копие на подадения файл   и отпечатва имената на намерените копия, ако съществуват такива.
 
 NB! Под 'копие' разбираме файл със същото съдържание.
 - **Решение:**
 ```bash
+  1 #!/bin/bash
+  2 file="${1}"
+  3 directory="${2}"
+  4
+  5 if [[ $# -ne 2 ]]; then
+  6     echo "Wrong Usage.Usage: <file> <directory>"
+  7     exit 1
+  8 fi
+  9 while read filename; do
+ 10     if cmp -s  "${filename}" "${file}" ; then
+ 11         basename "${filename}" # тук може и само echo
+ 12     fi
+ 13 done < <(find "${directory}" -type f)
+
+
 ```
 ## 05-b-5500.txt
 - **Условие:**<br/>
