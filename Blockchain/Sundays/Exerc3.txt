@@ -1,0 +1,16 @@
+goerlieth
+sepolia faucet
+sepoliaeth
+injected provider - metamask
+metamask networtj - goerli , sapolia
+chastniq kluch se izpolzva za podpisvane tam kato deploynem contracta
+getName()
+getFN()
+
+
+restrictors:
+require(_nu>3,"Number must be;
+");
+_; izpulni bodyto
+admin = person who depployed contract
+

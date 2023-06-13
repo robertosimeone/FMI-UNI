@@ -1,0 +1,233 @@
+
+/* @property --scale{
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 1;
+} */
+*{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+}
+.theme{
+    text-align: center;
+    color:darkgray;
+    margin:30px 0;
+    
+}
+.footer{    
+    display:flex;
+    flex-direction: column;
+    font-size: 10px;
+    font-style:italic;
+    justify-content: start;
+    padding-left:100px;
+    padding-top:8px;
+    overflow-x:hidden ;
+    bottom:0;
+    background-color: darkgray;
+    height:30px;
+    margin-left:20%;
+    
+}
+body{
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:large;    
+    overflow-x:hidden;
+}
+.sidebar{
+    position:fixed;
+    background:lightslategray;
+    width:21%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:1;
+}
+.sidebar h2{
+    text-align: center;
+    font-size:20px;
+    text-transform: uppercase;
+    color:white;
+    background-color: darkgray;
+    padding:28px;
+    font-weight: bolder;
+    position: sticky;
+    top:0;
+}
+.sidebar ul li {
+    margin:25px 0;
+
+}
+.sidebar ul li a{
+    color:white;
+    padding: 0 30px;
+    font-size:1vw;
+}
+.sidebar ul li a:hover{
+    color : black;
+    margin-left:20px;
+    transition:0.4s;
+}
+.sidebar ul li .indent:hover{
+    color : black;
+    margin-left:70px;
+    transition:0.4s;
+}
+.sidebar ul li .double-indent:hover{
+    color : black;
+    margin-left:90px;
+    transition:0.4s;
+}
+.main-container{
+    margin-left:22%;
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.indent{
+    margin-left:50px;
+}
+.double-indent{
+    margin-left:70px;
+}
+p{
+    text-indent: 20px;
+    font-size: large;
+    margin:30px 0 ;
+}
+h2{
+    color:rgb(87, 114, 142);
+}
+.center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      
+}
+figcaption{
+text-align: center;
+margin-top:10px;
+}
+figcaption a:hover {
+    color:blue;
+
+}
+.steps{
+    margin-left:20px;
+}
+.inside{
+    margin-left:40px;
+    font-size: large;
+}
+.interface-h3{
+    margin:30px 0px;
+}
+.cool{
+    margin-left:5%;   
+}
+.example-caption{
+    display:block;
+    text-align: center;
+    margin-top:10px;
+}
+strong{
+    font-size: medium;
+}
+.mop{
+    margin-left:30px;
+    list-style-type: none;
+}
+.mop-list{
+    margin-left:60px;
+}
+.sidebar{
+    overflow-x:hidden;
+    overflow-y: auto;
+}
+
+.cube-example{
+    display: flex;
+    width:100%;
+    justify-content: space-evenly;
+    margin:50px 0px;
+}
+.rotate-button{
+    height:30%;
+    margin:40px 0px;
+    padding:10px;
+    font-weight: bold;
+    
+}
+.output{
+    text-align: center;
+    margin-top:20px;
+}
+.example-container{
+    border:15px darkgray solid;
+    margin-bottom:50px;
+    position: relative;
+}
+.anonce{
+    margin-left:30px;
+}
+/* @keyframes hello {
+    0% {
+        --scale:2;
+    }
+    100%{
+        --scale:3;
+    }
+} */
+.rotate{
+    /* transform: rotate(20deg) scale(var(--scale)); */
+    height:100px;
+    width:100px;
+    background:red;
+    /* animation: hello 500ms alternate infinite; */
+}
+#trim{
+    height:700px;
+}
+.ball-container{
+    height:300px;
+    width:50vw;
+    border:15px darkgray solid;
+    overflow:hidden;
+    position:relative;
+    margin:auto;
+    margin-bottom:50px;
+}
+.ball{
+    height:60px;
+    width: 60px;
+    border-radius: 50px;
+    background: red;
+    transition: 1s;
+}
+.ball-anonce{
+    position:absolute;
+    top:50px;
+    left:50px;
+}
+.mv{
+    margin-bottom:30px;
+}
+.special{
+    color:red;
+    font-size:30px;
+}
+.made{
+    font-weight: bolder;
+}
+.super{
+    vertical-align: super;
+    font-size:small;
+}
+.super a{
+    color:darkkhaki;
+}
+.super a:hover{
+    color:blue;
+}

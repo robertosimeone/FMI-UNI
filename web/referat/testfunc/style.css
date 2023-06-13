@@ -1,0 +1,29 @@
+/* Пример1 */
+#background-example{
+    margin:auto;
+    height:300px;
+    width:200px;
+    border:1px solid gray;
+}
+#red, #green,#yellow{
+    display:block;
+    margin:auto;
+    margin-top:60px;
+}
+p{
+    text-align: center;
+}
+#box{
+    height:50px;
+    width:50px;
+    background-color: red;
+    margin:auto;
+    margin-top:40px;
+}
+.container-example{
+    height:200px;
+    width:300px;
+}
+#button{
+    opacity:1;
+}

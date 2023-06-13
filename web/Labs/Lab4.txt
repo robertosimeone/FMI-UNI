@@ -1,0 +1,3 @@
+dnamchno i statichno svurzvane(tova e za normalni funkcii i funkcii s strelkichka)
+remoeventlistenr - > za da ne se poluchi rekursiq(ama zashto? не махаме ли евентлинстенера така и няма да бачка?)
+json -> само двойни кавички,не описва действия и функции(тоест няма как да бъдат закодирани в json)	ls

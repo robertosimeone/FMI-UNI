@@ -1,0 +1,90 @@
+exec - tekushtiq proces spira da izpulnqva nashata programa i produljava da izpulnqva novata programa, toest ako exec se izpulni uspeshno celiq kod koito e sled nego nqma da se izpulni
+nashata programa shte e izcheznala ot adresnoto prostranstvo na tozi proces,i drugata progrma prosto shte se izpuln is exec
+(char* Null) se podava za da moje da kajem stop na argumentite koito se podavat
+ako exec failne,koda sled nego si se izpulnqva
+execlp - tezi promenlivi s p v imeto gledat promenlviata path i ot tam tursqt promenlivite - tost "date" vmesto /bin/date moje da pishem za tursene na komanda
+"ps","-u","human",(char*)NULL; -> tova e greshka
+"ps" "ps" ""-u "human" tova veche e pravilno
+purviq argument e samata komanda a vtoroto e nuleviq argument na komandata, povecheto komandi ochakvat 0 arugment da e imeto na komandata,(povecheto komandi go iziskwat)
+ako iskame masiv s argumentite po nqkakuv nachin 
+ char * args[] = {"ps" "-u" "human" NULL},null si e bez skobki
+execvp(ps
+exec iska char * masiv koeto e po istoricheski prichini
+nqkoi komandi kato sleep ne gi interesuva kakuv ni e purviq argument, toest moje da podadem "sleep","pesho","60",0
+procesite suzdadeni ot fork se izpulqva koda ot tova mqsto deto e izvikano fork-a
+pid se vrushta ot roditeliq
+0 se vrushta ot deteto
+operacionnate sistema switchva procesite kakto si iska
+samo edin proces pishe zashtoto failoviq descriptor moje da se izpulqva ot edin process
+wait - roditelq chaka deteto da izvursh irabotata si->wait(NULL);
+hubavo e osnovniq process da izchaka vsichki deca deto e punsal v vsqka programa
+wait(&status)
+int status
+v koq da zapishe statusa na procesa koito e zavurshil
+wait chaka proizvolno dete na procesa da zavurshi
+getpid() - vrushta pida na tekushtiq process->tova e systemcall
+tozi status ne e samo exit status a ima i drugi neshta,
+if WIFEXITED(status) - > dali vuprosniqt status oznachava che e izlqzul normalno vikaiki exit
+{int exit_status = WEXITSTATUS(status);}
+else
+{znachi procesut ni e bil ubit i tuk si pravim logikata i realno tuk nqma exit status}
+if (wifexited(status) && wexitstatus(status) == 0 {procesut e prikluchil uspeshno}
+else{error dokato se e izpulnqvalo deteto}
+waitpid
+
+(char *) NULL i 0 sa ekvivalentnni(to mai iamshe i const predi tva de ama da
+wait chaka proizvolno dete na roditelq da prikluchi
+ako iskame vsichkite realno wait-vame v for cikul
+/srv/fmi-os/sample_code
+int main(int argc,char * argv[])
+/home/human...demos neshto si
+if(wait(&status)<0){err(1....} moje wait-a da fail-ne i zatova go prvoerqvame,pak si e systemcall
+execv iska char * , no kato definirame amasiva iska char * const i tn,trqbva da se mahnat warningi ot makefile predpolagam
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+vij primer za descritpori - foo bar -> fobar o ,mislq che deteto nasledqwa deskritptor ot parent-a
+
+
+dup i dup2
+zatwarqne na fialove deskriptori close(desk)a

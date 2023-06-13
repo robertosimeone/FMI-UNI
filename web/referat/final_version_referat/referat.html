@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CSSOM</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./javascript/script.js" defer></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Съдържание</h2>
+        <ul class="nav">
+            <li>
+                <a href="#1s">1 Какво е CSSOM и как работи?</a>
+            </li>
+            <li>
+                <a href="#2s">2 Интерфейси</a>
+            </li>
+            <li>
+                <a class="indent" href="#3s">2.1 CSSStyleDeclaration</a>
+            </li>
+            <li>
+                <a class="indent" href="#4s">2.2 StyleSheetList</a>
+            </li>
+            <li>
+                <a class="indent" href="#5s">2.3 StyleSheet</a>
+            </li>
+            <li>
+                <a class="indent" href="#6s">2.4 CSSStyleSheet</a>
+            </li>
+            <li>
+                <a class="indent" href="#7s">2.5 CSSRuleList</a>
+            </li>
+            <li>
+                <a class="indent" href="#8s">2.6 CSSRule</a>
+            </li>
+            <li>
+                <a class="double-indent" href="#9s">2.7.1 CSSStyleRule</a>
+            </li>
+            <li>
+                <a class="double-indent" href="#10s">2.7.2 CSSGroupingRule</a>
+            </li>
+            <li>
+                <a class="double-indent" href="#11s">2.7.3 CSSKeyframesRule</a>
+            </li>
+            <li>
+                <a class="double-indent" href="#12s">2.7.4 CSSKeyframeRule</a>
+            </li>
+            <li>
+                <a href="#13s">3 CSS Typed OM</a>
+            </li>
+            <li>
+                <a  href="#14s">4 Заключение</a>
+            </li>
+            <li>
+                <a  href="#15s">5 Списък с програмен код</a>
+            </li>
+            <li>
+                <a  href="#16s">6 Списък с фигури</a>
+            </li>
+            <li>
+                <a  href="#17s">7 Цитирана литература</a>
+            </li>
+
+
+           
+            
+           
+        </ul>
+    </div>
+    <div class="main-container">
+        <h1 class="theme">CSS Object Model - CSSOM </h1>
+        <section class="intro">
+            <h2 id="1s">1. Какво е CSSOM и как работи?
+                <span class="super"><a href="#2i">[52]</a></span>
+                <span class="super"><a href="#3i">[53]</a></span>
+                <span class="super"><a href="#5i">[55]</a></span>
+                <span class="super"><a href="#6i">[56]</a></span>
+                
+            </h2>
+            <p >CSS обектният модел (CSSOM) е набор от API за четене и модифициране на информация,
+                свързана със стила (CSS) на документ. С други думи, подобно на начина, по който DOM позволява
+                структурата и съдържанието на документа да бъдат прочетени и модифицирани от JavaScript, CSSOM позволява
+                стилът на документа да бъде прочетен и модифициран от JavaScript.</p>
+            <p >За да си отговорим на въпроса “Как работи” трябва да погледнем на нещата
+                по-отдалеч.Нека разгледаме какво е <strong>critical rendering path</strong> или критичен път на
+                рендериране.</p>
+            <img class="center" src="./images/crucialpath.png" alt="crucial rendering path">
+            <figcaption><strong>Фигура 1:</strong> Critical rendering path <a href="#1f">[48]</a></figcaption>
+            <p >Както е показано на снимката по-горе имаме няколко стъпки в критичния път на
+                рендериране.Нека ги разгледаме:</p>
+            <ol class="steps">
+                <li>
+                    <h3>DOM Дърво</h3>
+                    <p >Всяко JavaScript обектно възелче се създава, когато двигателът за
+                        изобразяване получи HTML елементи като body, div и други. След създаването на възел, се създава
+                        структура подобна на дърво с помощта на тези възли. Както знаем HTML елементите са вложени един
+                        в друг, двигателят за изобразяване възпроизвежда тази вложена структура чрез възли в DOM
+                        дървото. Това помага за повишаване на продуктивността на браузъра за ефективно управление на уеб
+                        страницата. Дървото на DOM се състои от най-горния елемент и има рамена, прикачени според
+                        вложеността в HTML документа.
+                    </p>
+                </li>
+                <li>
+                    <h3>CSSOM</h3>
+                    <p >CSSOM означава CSS Object Model или CSS Обектен модел. Когато двигателят за
+                        изобразяване конструира DOM от HTML файла, той среща
+                        &lt; link &gt; таг за връзка, който свърза css документа към html документа. След завършване на
+                        построяването на DOM дървото, CSS се чете от всички източници, както външни, така и
+                        вътрешни,inlne и стилове на user-agent. Всяко възелче в потребителското дърво се отнася до
+                        елемент на стил, който се прилага към DOM елемент. Браузърът също притежава своя собствен
+                        user-agent stylesheet. Когато се създава CSS обектен модел, първо се създават CSS свойства за
+                        DOM елемента чрез заместване на user-agent stylesheet-a. Ако свойството на CSS за HTML елемент
+                        не е дефинирано нито в стиловете на разработчика, нито в браузъра, то наследява свойството на
+                        родителския елемент.
+                    </p>
+                </li>
+                <li><h3>Render Tree</h3>
+            <img class="center" src="./images/how.png" alt="Render-tree">
+            <figcaption><strong>Фигура 2:</strong> Render Tree <a href="#2f">[49]</a></figcaption>
+            <p>За да конструираме <strong>Render дървото</strong> трябва да почнем от коренът на DOM дървото,което в нашия случай е &lt;html&gt; тагът и след това трябва да проверим дали има някакви css правиал,които трябва да се приложат на този елемент.Друго важно нещо за <strong>Render дървото</strong> е, че на него се изобразява само видимо съдържание,т.е. ако имаме елемент , на който display</strong>display</strong> css свойството му е зададено на <strong>"none"</strong>,то този елемент няма да бъде изобразен в <strong>Render дървото</strong>.
+            Нека да продължим с примера.Сега се намираме на &lt; html &gt; елементът.Тъй като &lt; html &gt; и &lt; head &gt; таговете не съдържат видимо съдържание и затова ги махаме.След това имаме &lt; body &gt; и го копираме,заедно с неговия стил.За лявата страна имаме &lt;p&gt;,който съдържа видимо съдържание, но &lt;span&gt; елементът има "display:none" и затова се маха от <strong>Render дървото</strong>.Копираме "Helo" и "students".&lt;div&gt; и &lt;img&gt; съдържат видимо съдържание и затова ги копираме.Резултатът е :</p>
+            <img class="center" id="trim" src="./images/result.png" alt="result">
+            <figcaption><strong>Фигура 3:</strong> Render Tree резултат <a href="#3f">[50]</a></figcaption>
+                </li>
+                <li>
+                    <h3>Layout</h3>
+                    <p >CSSOM означава CSS Object Model или CSS Обектен модел. Когато двигателят за
+                        изобразяване конструира DOM от HTML файла, той среща
+                        <link> таг за връзка, който свърза css документа към html документа. След завършване на
+                        построяването на DOM дървото, CSS се чете от всички източници, както външни, така и
+                        вътрешни,inlne и стилове на user-agent. Всяко възелче в потребителското дърво се отнася до
+                        елемент на стил, който се прилага към DOM елемент. Браузърът също притежава своя собствен
+                        user-agent stylesheet. Когато се създава CSS обектен модел, първо се създават CSS свойства за
+                        DOM елемента чрез заместване на user-agent stylesheet-a. Ако свойството на CSS за HTML елемент
+                        не е дефинирано нито в стиловете на разработчика, нито в браузъра, то наследява свойството на
+                        родителския елемент.
+                    </p>
+                    <h4>4.1 Layout Trashing</h4>
+                    <p >Layout thrashing е процес, при който браузърите пренареждат или пренаписват
+                        уеб страницата множество пъти, преди да се зареди страницата. Всяки път, когато страницата се
+                        опреснява, свързаните елементи на страницата като размер, форма и позиция се заместват от
+                        предишните оформителни събития. Layout thrashing е силно засегнат от DOM, CSSOM и дървото на
+                        изображението. Цената на оформянето (layout cost) е изчислението на изчислителния ресурс,
+                        необходим на уеб браузъра, за да оформи, позиционира и нарисува възлите на дървото на
+                        изображението. Цената на оформянето зависи от фактори като броят на елементите на уеб
+                        страницата, присъстващи за оформянето, и сложността на процеса на оформяне. Сложността на
+                        процеса на оформяне се определя от следните фактори:</p>
+
+                    <ul class="inside">
+                        <li>Често използване на flexbox. </li>
+                        <li>Наличието на анимация на страницата. </li>
+                        <li>Не пренареждане на голяма част от DOM за малки промени в елемента.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Paint</h3>
+                    <p >На този етап, браузърът преобразува изчисленията, направени по време на
+                        фазата на оформяне, в реални пиксели на екрана. При фазата на рисуване, елементите се запълват
+                        пиксел по пиксел на екрана. Това запълване с цветове се извършва на множество повърхности,
+                        наречени слоеве (layers). Дървото на оформянето и дървото на слоевете се комбинират, за да
+                        създадат записи за рисуване на елементите на екрана в различни слоеве. Рисуването на елементите
+                        може да се извърши по два начина:
+                    </p>
+                    <ul class="inside">
+                        <li>Глобално: При глобалния метод цялото дърво се рисува наведнъж. </li>
+                        <li>Инкрементален ред: При този метод се рисуват само тези региони, които не засягат останалата
+                            част от дървото.</li>
+                    </ul>
+                    <p > Когато е необходимо да се прерисува само определен регион, се използва
+                        инкременталният ред за рисуване. Върху региона, който трябва да бъде променен, се инициализира
+                        правоъгълник, чрез който браузърът може лесно да идентифицира региона, който изисква
+                        репродукция, и този регион се рисува без да се нарушава останалата част от дървото.</p>
+                </li>
+                <li>
+                    <h3>Composition</h3>
+                    <p >На стъпка на композицията, слоевете, създадени в стъпката на рисуването, на
+                        които са нарисувани елементите, се комбинират, за да се покаже окончателният резултат на екрана.
+                        Предимството на рисуването на елементите в различни слоеве е, че те се рисуват на редовна
+                        основа, и такива промени могат да се осъществят лесно, без да се нарушават другите елементи, тъй
+                        като всички те съществуват на различни слоеве.
+
+                        Различните слоеве имат различни елементи, нарисувани върху тях. За да се види окончателният
+                        резултат на екрана, тези слоеве трябва да бъдат комбинирани според позицията на елементите в
+                        дървото на изображението. Слоевете трябва да бъдат позиционирани в подходящ ред, за да се
+                        избегне застъпването на елементите.
+                    </p>
+                </li>
+            </ol>
+        </section>
+        <section class="interfaces">
+            <h2 id="2s">2. Интефейси<span class="super"><a href="#17i">[67]</a></span></h2>
+            <section class="interface">
+                <h3 id="3s" class="interface-h3">CSSStyleDeclaration<span class="super"><a href="#7i">[57]</a></span></h3>
+                <p >Интерфейсът CSSStyleDeclaration представлява обект, който е блок за CSS декларация, и излага информация за стил и различни методи и свойства, свързани със стила.</p>
+                <p >Има три начина, по които можем да постъпим един CSSStyleDeclaration обект.</p>
+                <ol class = "cool">
+                    <li>
+                        <h4>HTMLElement.style</h4>
+                        <p >Това е най-основният начин , по които можем да достъпим и манипулираме CSS свойства чрез JavaScript.HTMLElement.style се грижи за <strong> inline</strong> стиловете на елементите.</p>
+                        <pre>
+                            <code>document.body.style.backgroundColor = “green”;</code>
+</pre>
+                        <span class="example-caption"><strong>Код 1:</strong> Достъпване на 'background-color' CSS свойсвто <a href="#1c">[1]</a></span>
+                        <p >На горния пример сменяме CSS свойството background-color на “green”.За изписване на CSS свойства в JavaScript се използва camelCase конвенцията, както можем да видим от примера по-горе ( background-color става backgroundColor ) .Изключение от това правило прави единствено float, понеже float е запазена дума в JavaScript.Вместо това CSS свойството float e заменено с cssFloat.</p>
+                        <p class ="simple-text">Ето и един малко по-сложен Пример:</p>
+                        <!-- //TODO - ДОбави пример с топче и пример с сменяне на background-colro -->
+                        <p >Използването на HTMLElement.style прави сменянето на стиловете лесно, но има един проблем - както споменахме по-горе работи само за inline стилове на елементите.Това става ясно като изпълним по-долния код:</p>
+                        <pre><code>document.body.style.backgroundColor = “lightblue”;
+console.log(document.body.style.backgroundColor);// “lightblue”</code>
+</pre>
+                            <span class="example-caption"><strong>Код 2:</strong> Задаване на стойност и логване в конзолата <a href="#2c">[2]</a></span>   
+                            <p >На по-горният пример дефинираме backgroundColor свойството на body елементът и след това изписваме цветът на конзолата - “lightblue”.Всичко работи перфектно, но ако се опитаме да изведем стойността на backgroundColor свойство на същия body елемент няма да получим нищо, освен ако не сме дефинирали inline стил на елемента в HTML или през JavaScript.Например:</p>
+                            <pre><code>console.log(document.body.style.backgroundColor)//“”</code>
+</pre>
+                            <span class="example-caption"><strong>Код 3:</strong> Извикване на style върху елемент,който няма дефиниран <strong> inline</strong> стил <a href="#3c">[3]</a></span>   
+                            <p >Горният пример връща празен string,защото нямаме дефиниран inline стил за body елементът.Това означава , че дори да имаме дефинирано свойството background-color в  CSS стиловия лист, style елементът не може да го види.</p>
+                        <div class="ball-container" id="bc">
+                            <div class="ball-anonce">Цъкнете някъде в това правоъгълниче ,за да видите как топката се мести!</div>
+                            <div class="ball" id="bll"></div>
+                        </div>
+                        <pre><code>const ball = document.getElementById("bll");
+const div = document.getElementById("bc");
+function getPosition(el) {
+    var xPosition = 0;
+    var yPosition = 0;
+    
+    while (el) {
+        if (el.tagName == "BODY") {
+        // deal with browser quirks with body/window/document and page scroll
+        var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
+        var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
+    
+        xPosition += (el.offsetLeft - xScrollPos + el.clientLeft);
+        yPosition += (el.offsetTop - yScrollPos + el.clientTop);
+        } else {
+        xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+        yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+        }
+    
+        el = el.offsetParent;
+    }
+    return {
+        x: xPosition,
+        y: yPosition
+    };
+    }
+div.addEventListener("click",getClickPosition,false);
+function getClickPosition(e){
+    var parentPosition = getPosition(div);
+    var xPosition = e.clientX - parentPosition.x - (ball.offsetWidth/2);
+    var yPosition = e.clientY -parentPosition.y -(ball.offsetHeight/2);
+    var translate3dValue = "translate3d(" + xPosition + "px," +yPosition + "px,0)";
+    ball.style.transform = translate3dValue;
+}</code>
+</pre>
+<span class="example-caption"><strong>Код 4:</strong> Код за топче <a href="#4c">[4]</a></span>
+                    </li>
+                    <li><h4>window.getComputedStyle()</h4>
+                        <p>Този метод връща CSSStyleDeclaration обект, който е само за четене.За разлика от HTMLElement.style, методът getComputedStyle() ни връща доста информация за самото CSS свойство, като също така работи както с inline стилове, така и с външни и вътрешни  stylesheets.Нека разгледаме следният пример:</p>
+                        <pre><code>//CSS код
+body{
+background:papayawhip;
+}
+//javascript код
+console.log(window.getComputedStyle(document.body).background);//"rgb(255, 239, 213) none repeat scroll 0% 0% / auto padding-box border-box"</code>
+</pre>
+                            <span class="example-caption"><strong>Код 5:</strong> Логване в конзолата на изчисления стил <a href="#5c">[5]</a></span>
+                            <p>Както виждате background краткото правило беше дефинирано чрез единствена стойност - papayawhip, но методът getComputedStyle() ни върна всички стойности, които се включват в краткото правило.Тоест за всяко кратко правило, getComputedStyle() ни връща стойностите по подразбиране за всички свойства, които не са дефинирани.</p>   
+                            <p>Има три еквивалентни начина,по които можем да достъпим свойствата чрез getComputedStyle():</p>
+                            <pre><code>window.getComputedStyle(el).backgroundColor;
+
+window.getComputedStyle(el).[‘background-color’];
+
+window.getComputedStyle(el).getPropertyValue(‘background-color’);</code>
+</pre> 
+                                <span class="example-caption"><strong>Код 6:</strong> Начини за достъпване на свойство чрез <strong>window.getComputedStyle()</strong> <a href="#6c">[6]</a></span>
+                                <p>Също така можем да извличаме стиловете и на псевдо-елементи чрез методът getComputedStyle.Може да срещнете следния  код някъде:</p>
+                                <pre><code>window.getComputedStyle(body, null).backgroundColor;</code>
+</pre>
+                            <span class="example-caption"><strong>Код 7:</strong> Извикване на методът <strong>getComputedStyle()</strong> в предишни версии на <strong>Firefox</strong> <a href="#7c">[7]</a></span>
+                            <p>window.getComputedStyle(body, null).backgroundColor;
+                                Вторият аргумент “null” се подава, защото 	предишни версии на Firefox са изисквали задължително втори аргумент, но в днешно време не е задължителен.Вторият аргумент в днешно време се ползва именно за да посочим псевдо-елементът.</p>
+                                <p>Нека имаме следната декларация на псевдо-елемент:</p>
+                                <pre><code>//CSS код
+.box::before {
+    content:”Example”;
+    display:block;
+    width:50px;
+}
+//javascript код
+let box = document.querySelector(‘.box’);
+window.getComputedStyle(box,’::before’).width;//50px;</code>
+</pre>
+                                <span class="example-caption"><strong>Код 8:</strong> Достъпване на <strong>псевдо-елементи</strong> <a href="#8c">[8]</a></span>
+
+
+                            
+
+                    </li>
+                    <li><h4>CSSStyleSheet</h4>
+                    <p>За този интефейс ще си говорим в секцията "CSSStyleSheet"</p></li>
+                </ol>
+            </section>
+            <section class="interface">
+                <h3 id="4s"class="interface-h3">StyleSheetList<span class="super"><a href="#8i">[58]</a></span></h3>
+                <p>Интерфейсът StyleSheetList	съдържа CSSStyleSheet обекти.Той може да се достъпи чрез document.style	Sheets.</p>
+                <h4>Променливи:</h4>
+                <p><strong>length</strong> - връща броят на CSSStyleSheet обектите в текущия StyleSheetList обект.</p>
+                <h4>Методи:</h4>
+                <p><strong>item(index)</strong> - връща CSSStyleSheet обект,намиращ се на индекс index или null, ако не съществува обект на този индекс.</p>
+                <p>Може да използваме и document.stylesheets[i] ,за да взимаме CSSStyleSheet обект, намиращ се на индекс i.</p>
+                
+
+            </section>
+            <section class="interface">
+                <h3 id="5s" class="interface-h3">StyleSheet<span class="super"><a href="9i">[59]</a></span></h3>
+                <p>Обект имплементиращ StyleSheet интерфейсът.Той представлява един базов клас , който се специализира по-дълбоко от CSSStyleSheet, като CSSStyleSheet го наследява.</p>
+                <h4>Променливи:</h4>
+                <ul class="mop">
+                    <li><p><strong>disabled</strong> - bool стойност, която показва дали текущият StyleSheet е приложен или не.</p>
+                    <pre><code>var stylesheet = document.styleSheets[0];
+stylesheet.disabled = true;</code>
+</pre>
+                            <span class="example-caption"><strong>Код 9:</strong> Използване на <strong>disabled</strong> променлива <a href="#9c">[9]</a></span>
+                            <p>В по-горния пример променяме disabled на true и по този начин деактивираме конкретния StyleSheet</p>
+
+                </li>
+                <li><p><strong>stylesheet.href</strong> - връща адреса на конкретния StyleSheet</p>
+                <pre><code>console.log(document.styleSheets.item(0).href);
+//“file:////C:/Windows/Desktop/example.css"</code>
+</pre>
+                            <span class="example-caption"><strong>Код 10:</strong> Използване на <strong>href</strong> променлива <a href="#10c">[10]</a></span>
+                        </li>
+                        <li><p><strong>media</strong> -  връща MediaList обект</p></li>
+                        <li><p><strong>ownerNode</strong> - връща Node,който асоциира този StyleSheet с текущия  документ.Най-често връща &lt;link&gt; или &lt;style &gt; елементи.</p>
+                        <pre><code>console.log(document.styleSheets[0].ownerNode);//object HTMLLinkElement</code>
+</pre>
+                                <span class="example-caption"><strong>Код 11:</strong> Използване на <strong>ownerNode</strong> свойство <a href="#11c">[11]</a></span>
+
+                    </li>  
+                    <li><p><strong>parentStyleSheet</strong> - ако текущия StyleSheet e импортнат чрез @import правило връща StyleSheet oбектът ,който съдържа @import правилото.Ако stylesheet е бил добавен чрез &lt;link&gt; или  принадлежи &lt;style&gt; елемент връща null.</p></li>                      
+                    <li><p><strong>title</strong> - връща string,представляващ заглавието на дадения StyleSheet.</p>
+                    <pre><code>&lt;head&gt;
+…
+&lt;style id=“myStyle” title = “This is an empty title”&gt;
+&lt;/head&gt;
+&lt;script&gt; var style_tag = document.getElementById(‘myStyle’)
+console.log(style_tag.sheet.title) &lt;/script&gt;//This is an empty title</code>
+</pre>
+                        <span class="example-caption"><strong>Код 12:</strong> Използване на <strong>title</strong> променлива <a href="#12c">[12]</a></span>
+                    </li>
+                    <li><p><strong>type</strong> - връща string,репрезентиращ езика на StyleSheet-a.</p></li>
+
+
+                </ul>
+            </section>
+            <section  class="interface">
+                <h3 id="6s" class="interface-h3">CSSStyleSheet<span class="super"><a href="#10i">[60]</a></span></h3>
+                <p>CSSStyleSheet интефейсът представлява един CSS StyleSheet и чрез него може да се преглеждат и модифицира списъка с правила съдържащ се в конкретен StyleSheet.Наследява променливи и методи от StyleSheet.Един StyleSheet обект се създава  и пъхнат в StyleSheetList обектът на документът автоматично от браузърът, когато дадени CSSStyleSheet е зареден.</p>
+                <h4>Конструктор</h4>
+                <p><strong>CSSStyleSheet()</strong> - създава нов CSSStyleSheet обект.</p>
+                <pre><code>let ss = new CSSStyleSheet();
+ss.insertRule("a { color: red; }");
+console.log(ss.cssRules[0].cssText);//a { color:red;}</code>
+</pre>
+                            <span class="example-caption"><strong>Код 13:</strong> Използване на <strong>CSSStyleSheet()</strong> конструктор <a href="#13c">[13]</a></span>
+                            <h4>Променливи</h4>
+
+                <ul class="mop">
+                    <li>
+                        <p><strong>cssRules</strong> - връща CSSRuleList обект,който ни дава актуален списък от CSSRule обекти.</p>
+                        <pre><code>let myRules = document.styleSheets[0].cssRules;
+for(i of myRules){
+    do_something;
+}</code>
+</pre>
+                                <span class="example-caption"><strong>Код 14:</strong> Използване на <strong>cssRules</strong> променлива <a href="#14c">[14]</a></span>
+
+                    </li>
+                    <li><p><strong>ownerRule</strong> - връща кореспондиращото @import правило, ако StyleSheet-a e бил добавен към документа чрез @import правило,null иначе.</p>
+
+                    </li>
+                </ul>
+                <h4>Методи</h4>
+                <ul class="mop">
+                    <li><p><strong>deleteRule(index)</strong> - трие правило на подаден индекс.</p>
+                        </li>
+                        <li><p><strong>insertRule(rule,index)</strong> - добавя правило на конкретне индекс.Ако не е подаден индекс по подразабиране е 0.</p></li>
+                        <li><p><strong>replace(rules)</strong> - Асинхронно заменя съдържанието на един CSSStyleSheet обект(правилата) с нововъведение правила.Приема string,който репрезентира новите правила.Работи само върху CSSStyleSheet обекти, който са създадени чрез конструктора CSSStyleSheet();
+                        </p>
+                        <pre><code>var ss = new CSSStyleSheet();
+ss.insertRule(“body{color:red;}”);
+ss.insertRule(“div{color:green;}”);
+console.log(ss.cssRules[0].cssText,ss.cssRules[1].cssText);
+//body{color:red;} div {color:green}
+ss.replace(“div{color:orange;}”);
+console.log(ss.cssRules[0].cssText);
+//div {color:orange;}
+console.log(ss.cssRules[1].cssText);
+//error -  CSSStyleSheet има само едно правило в себе си.</code></pre>
+                    </li>
+                    <li><p><strong>replaceSync(rules)</strong> - прави абсолютно същото нещо както и replace, само че го прави синхронно.</p></li>
+                </ul>
+            </section>
+            <section class="interface">
+                <h3 id="7s" class="interface-h3">CSSRuleList<span class="super"><a href="#11i">[61]</a></span></h3>
+                <p>Интерфейс ,който представлява обект от CSSRule обекти.</p>
+                <h4>Променлвиви</h4>
+                <ul class="mop">
+                    <li><p><strong>length</strong> - връща int , представляващ броя на CSS правилата в текущия обект.</p></li>
+                </ul>
+                <h4>Методи</h4>
+                <ul class="mop">
+                    <li><p><strong>item(index)</strong> - връща CSS правилото, съответстващо на конкретен индекс.</p></li>
+                </ul>
+            </section>
+            <section class="interface">
+                <h3 id="8s"class="interface-h3">CSSRule<span class="super"><a href="#12i">[62]</a></span></h3>
+                <p>Базовият интерфейс CSSRule представлява едно CSS правило.Има неколцина правила ,които наследяват и специфицират по-нататък правилата:</p>
+                <ul class="mop-list">
+                    <li><p>CSSGroupingRule</p></li>
+                    <li><p>CSSStyleRule</p></li>
+                    <li><p>CSSImportRule</p></li>
+                    <li><p>CSSMediaRule</p></li>
+                    <li><p>CSSFontFaceRule</p></li>
+                    <li><p>CSSPageRule</p></li>
+                    <li><p>CSSNamespaceRule</p></li>
+                    <li><p>CSSKeyframesRule</p></li>
+                    <li><p>CSSKeyframeRule</p></li>
+                    <li><p>CSSCounterStyleRule</p></li>
+                    <li><p>CSSSupportsRule</p></li>
+                    <li><p>CSSFontFeatureValuesRule</p></li>
+                    <li><p>CSSFontPaletteValuesRule</p></li>
+                    <li><p>CSSLayerBlockRule</p></li>
+                    <li><p>CSSLayerStatementRule</p></li>
+                    <li><p>CSSPropertyRule</p></li>
+                </ul>
+                <p>В този реферат ще разгледаме само няколко от тях.</p>
+                <h4>Променливи</h4>
+                <ul class="mop">
+                    <li><p><strong>cssText</strong> - връща string,който репрезентира правилото.</p>
+                    <pre><code>var ss = new CSSStyleSheet();
+ss.insertRule("body{color:red;}");
+console.log(ss.cssRules[0].cssText);//"body { color: red; }"</code>
+</pre>
+                    <span class="example-caption"><strong>Код 15:</strong> Взимане на правило от стилов лист <a href="#15c">[15]</a></span>
+                    </li>
+                <li><p><strong>parentRule</strong> - връща обвиващото правило или null,ако няма такова.</p>
+                    <p>Нека имам следния CSS:</p>
+                <pre><code>@media (min-width: 500px) {
+.box {
+    width: 100px;
+    height: 200px;
+    background-color: red;
+}
+
+body {
+    color: blue;
+}
+}</code>
+</pre>
+<span class="example-caption"><strong>Код 16:</strong> CSS код нужен за демонстрацията по-долу <a href="#16c">[16]</a></span>
+<p>CSS кодът се състои от едно @media правило, с две вложени правила със селектори - <strong>".box"</strong> и <strong>"body"</strong></p>
+<pre><code>let myRules = document.styleSheets[0].cssRules;
+let childRules = myRules[0].cssRules;
+console.log(childRules[0].cssText);//".box { width: 100px; height: 200px; background-color: red; }"</code>
+</pre>
+<span class="example-caption"><strong>Код 17:</strong> JavaScript код ,показващ вложеното правило <a href="#17c">[17]</a></span>
+<p>На по-горния пример взимаме правилото отнасящо се до .box селекторът, за да покажем в следващия пример,че като извикаме  parentRule на него,получаваме @media правилото.</p>
+<pre><code>console.log(childRules[0].parentRule.cssText);
+//"@media (min-width: 500px) {
+//   .box { width: 100px; height: 200px; background-color: red; }
+//    body { color: blue; }
+//}"</code>
+</pre>
+<span class="example-caption"><strong>Код 18:</strong> JavaScript код ,показващ нагледно <strong>parentRule</strong> променливата <a href="#18c">[18]</a></span>
+                </li>
+                <li><p><strong>type</strong> - връща константа,кошто репрезентира типа на правилото.Например 1 е CSSRule.STYLE_RULE ,4 e CSSRule.MEDIA_RULE,7 е CSSRule.KEYFRAMES_RULE,8 e CSSRule.KEYFRAME_RULE и така нататък.</p>
+                    <p>За този пример ще ползваме CSS кодът от <strong>Пример 17</strong>.На него може да видим ,че имаме едно media правило и едно style правило.Със следния JavaScript код можем да изциклил масива с правила и изведем типа на всяко едно от тях:</p>
+
+                <pre><code>var rules = document.styleSheets[0].cssRules;
+for(let i = 0 ; i &lt; rules.length;i++){
+    console.log(rules[i].type);
+}
+//4 //1</code>
+</pre>
+<span class="example-caption"><strong>Код 19:</strong> JavaScript код ,показващ <strong>type</strong> променливата. <a href="#19c">[19]</a></span>
+
+            </li>
+                </ul>
+            </section>
+            <section class="interface">
+                <h3 id="9s" class="interface-h3">CSSStyleRule<span class="super"><a href="#13i">[63]</a></span></h3>
+                <p>Този интерфейс репрезентира едно CSS правило за стил.</p>
+                <h4>Променливи</h4>
+                <ul class="mop"><li>
+                    <p><strong>selectorText</strong> - връща селектор-а на даденото правило.</p>
+                    <pre><code>let myRules = document.styleSheets[0].cssRules;
+console.log(myRules[0].selectorText); // a string containing "h1"</code>
+</pre>
+<span class="example-caption"><strong>Код 20:</strong> JavaScript код ,показващ <strong>selectorText</strong> променливата. <a href="#20c">[20]</a></span>
+
+
+                </li>
+                <li>
+                    <p><strong>style</strong> - връща CSSStyleDeclaration обект свързан с даденото правило.</p>
+                <p>Нека имаме следния CSS:</p>
+                    <pre><code>h1{
+color:red;
+}</code>
+</pre>
+<span class="example-caption"><strong>Код 21:</strong> CSS код, необходим за примера по-долу. <a href="#21c">[21]</a></span>
+<p>В CSS правилото имаме едно просто style правило h1.Чрез следния JavaScript код можем да достъпим цвета посредством CSSStyleDeclaration обект:</p>
+<pre><code>let myRules = document.styleSheets[0].cssRules;
+console.log(myRules[0].style); // CSSStyleDeclaration object
+console.log(myRules[0].style.color); // “red”</code>
+</pre>
+<span class="example-caption"><strong>Код 22</strong> JavaScript код ,показващ <strong>style</strong> променливата <a href="#22c">[22]</a></span>
+                </li></ul>
+            </section>
+            <section class="interface">
+                <h3 id="10s" class="interface-h3">CSSGroupingRule<span class="super"><a href="#14i">[64]</a></span></h3>
+                <p>Представлява всяко @ правило, което съдържа други правила в себе си.</p>
+                <h4>Променливи</h4>
+                <ul class="mop">
+                    <li><p><strong>cssRules</strong> - връща списък с правилата, които се намират в текущото правило.
+                    </p>
+                    <pre><code>let mediarule = document.styleSheets[0].cssRules[0];
+console.log(mediarule.cssRules);// [object CSSRuleList]</code>
+</pre>
+<span class="example-caption"><strong>Код 23</strong> JavaScript код ,показващ <strong>cssRules</strong> променливата <a href="#23c">[23]</a></span>
+                </li>
+                </ul>
+                <h4>Методи</h4>
+                <ul class="mop">
+                    <li>
+                        <p><strong>deleteRule(index)</strong> - трие правило на определен индекс в текущото правило.</p>
+                        <p>Нека за следващия пример да използваме CSS кодът от <strong>Пример 17</strong></p>
+                        <pre><code>let mediarule = document.styleSheets[0].cssRules[0];
+for(let i = 0 ; i &lt; mediarule.cssRules.length;i++){
+    console.log(mediarule.cssRules[i].selectorText);
+//.box
+//body
+}
+mediarule.deleteRule(0);
+for(let i = 0 ; i &lt; mediarule.cssRules.length;i++){
+    console.log(mediarule.cssRules[i].selectorText);
+}//body</code>
+</pre>
+<span class="example-caption"><strong>Код 24:</strong> JavaScript код ,показващ <strong>deleteRule()</strong> методът <a href="#24c">[24]</a></span>
+<p>На горният JavaScript код  обхождаме правилата на media правилото и  изкараме селекторите.След това трием правилото,намиращо се на индекс 0 и отново извеждаме правилата.Може да забележим ,че първото правило е липсва:</p>
+                    </li>
+                    <li>
+                        <p><strong>insertRule(rule,index)</strong> - вмъква правило на конкретен индекс.Ако индекс не е подаден,то по подразбиране е 0.
+                        </p>
+                        <p>За следващият пример отново ще използваме CSS кодът от <strong>Пример 17</strong></p>
+                        <pre><code>var mediarule = document.styleSheets[0].cssRules[0];
+mediarule.insertRule(".back{color:red}",0);
+console.log(mediarule.cssRules[0].cssText);//“.back{color:red;}”</code>
+</pre>
+<span class="example-caption"><strong>Код 25:</strong> JavaScript код ,показващ <strong>insertRule()</strong> методът <a href="#25c">[25]</a></span>
+<p>На по-горния пример взимаме media правилото, след това добавяме ново правило в него на индекс 0 и изпринтваме правилото след това.</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="interface">
+                <h3 id="11s" class="interface-h3">CSSKeyframesRule<span class="super"><a href="#15i">[65]</a></span></h3>
+                <p>Интерфейсът CSSKeyframesRule описва обект, представляващ пълен набор от ключови кадри за CSS анимация. То съответства на съдържанието на цяло @keyframes at-rule.
+                </p>
+                <h4>Променливи</h4>
+                <ul class="mop">
+                    <li>
+                        <p><strong>name</strong> - Връща името на съответното @keyframes правило.</p>
+                        <p>Нека имам следния CSS код</p>
+                        <pre><code>@keyframes slidein {
+from {
+    transform: translateX(0%);
+}
+
+to {
+    transform: translateX(100%);
+}
+}</code>
+</pre>
+<span class="example-caption"><strong>Код 26:</strong>CSS код  <a href="#26c">[26]</a></span>
+<p>Чрез следния JavaScript код можем да вземем името  на @keyframes  правилото
+</p>
+<pre><code>et myRules = document.styleSheets[0].cssRules;
+let keyframes = myRules[0]; // a CSSKeyframesRule
+console.log(keyframes.name); // "slidein"</code>
+</pre>
+<span class="example-caption"><strong>Код 27:</strong> Javascript код ,демонстриращ <strong>name</strong> променливата <a href="#27c">[27]</a></span>
+
+                    </li>
+                    <li>
+                        <p><strong>cssRules</strong> - връща обект CSSRuleList,който съдържа правилата в текущото правило(както и при CSSGroupingRule)</p>
+
+                    </li>
+                </ul>
+                <h4>Методи</h4>
+                <ul class="mop">
+                    <li>
+                        <p><strong>appendRule(rule)</strong> - вкарва ново keyframe правило в текущото @keyframes правило.</p>
+                        <p>Нека имаме следния CSS код</p>
+                        <pre><code>@keyframes slidein {
+from {
+    transform: translateX(0%);
+}
+}</code></pre>
+<span class="example-caption"><strong>Код 28:</strong> CSS код<a href="#28c">[28]</a></span>
+<p>Чрез по-долния код извеждаме броя на правилата в @keyframes правилото, след това добавяме ново правило и пак извеждаме големината:
+</p>
+<pre><code>let myRules = document.styleSheets[0].cssRules;
+let keyframes = myRules[0]; // a CSSKeyframesRule
+console.log(keyframes.cssRules.length);
+keyframes.appendRule("to {transform: translateX(100%);}");
+console.log(keyframes.cssRules.length); // a CSSRuleList object with two rules</code>
+</pre>
+<span class="example-caption"><strong>Код 29:</strong> JavaScript,демонстриращ <strong>appendRule()</strong> методът<a href="#29c">[29]</a></span>
+
+
+                    </li>
+                    <li>
+                        <p><strong>deleteRule(selector)</strong> - трие едно keyframe правило от текущото @keyframes правило.На метода се подава селекторът на keyframe правилото, което искаме да изтрием като стринг.
+                        </p>
+                        <p>За по-долния пример ще използваме <strong>CSS</strong> кодът от Пример 29</p>
+                        <pre><code>let myRules = document.styleSheets[0].cssRules;
+let keyframes = myRules[0]; // a CSSKeyframesRule
+console.log(keyframes.cssRules.length);//1
+keyframes.deleteRule("from");
+console.log(keyframes.cssRules.length);//0</code>
+</pre>
+<span class="example-caption"><strong>Код 30:</strong> JavaScript,демонстриращ <strong>deleteRule()</strong> методът<a href="#30c">[30]</a></span>
+                    </li>
+                    <li>
+                        <p><strong>findRule(selector)</strong> - връща keyframe правилото,което кореспондира на подадения селектор.Ако такова не съществува се връща null.</p>
+                        <p>За следващият пример отновео ще използваме <strong>CSS</strong> кодът от Пример 29</p>
+                        <pre><code>let myRules = document.styleSheets[0].cssRules;
+let keyframes = myRules[0]; // a CSSKeyframesRule
+console.log(keyframes.findRule(“from").cssText);
+//"0% { transform: translateX(0%); }"</code>
+</pre>
+<span class="example-caption"><strong>Код 31:</strong> JavaScript,демонстриращ <strong>findRule()</strong> методът<a href="#31c">[31]</a></span>
+                    </li>
+                </ul>
+            </section>
+            <section class="interface">
+                <h3 id="12s" class="interface-h3">CSSKeyframeRule<span class="super"><a href="#16i">[66]</a></span></h3>
+                <p>Представлява едно правило единствено правило в един CSSKeyframesRule обект.</p>
+                <h4>Променливи</h4>
+                <ul class="mop">
+                    <li>
+                        <p><strong>keyText</strong> - представлява ключът на даден keyframe.Думата “from” е еквивалентна на “0%”,а “to” на “100%.”</p>
+                        <p>За по-долния пример ще използваме <strong>CSS</strong> кодът от <strong>Пример 29</strong></p>
+                        <pre><code>et myRules = document.styleSheets[0].cssRules;
+let keyframe = myRules[0].cssRules[0];// a CSSKeyframesRule
+console.log(keyframe.keyText);//“0%”</code>
+</pre>
+<span class="example-caption"><strong>Код 32:</strong> JavaScript,демонстриращ <strong>keyText</strong> променливата<a href="#32c">[32]</a></span>
+
+                    </li>
+                    <li>
+                        <p><strong>style</strong> - връща CSSStyleDeclaration обект,асоцииран с текущото keyframe правило.</p>
+                    </li>
+                </ul>
+            </section>
+        </section>
+            <section class="typedom">
+                <section class="intro">
+                    <h2 id="13s">3. CSS Типов Обектен Модел - CSS Typed OM</h2>
+                    <p>CSS Типовият Обектен Модел е уеб стандарт, който въвежда JavaScript API за работа с CSS свойства и стойности по по-структуриран и безопасен начин.Той е част от <strong>Houdini проектът</strong>. Той предоставя програмен начин за взаимодействие с CSS, позволявайки на разработчиците да манипулират стилове и да извършват свързани с CSS операции с помощта на JavaScript.
+                        Важно е да се отбележи, че CSS Typed OM е развиващ се стандарт и поддръжката от браузърите може да варира.</p>
+                        <h3>Предимства</h3>
+                        <ol class="mop-list">
+                            <li><p>Вместо низове, стойностите се достъпват  чрез JavaScript обекти, за да се улесни манипулиране на CSS.</p>
+                            <p>Низовете водят до много грешки,ето и пример:</p>
+                            <pre><code> const box = document.querySelector('#box');
+box.style.opacity = 0.3;
+console.log(box.style.opacity);//0.3
+box.style.opacity += 0.1;
+console.log(box.style.opacity);//0.3</code>
+</pre>
+<span class="example-caption"><strong>Код 33:</strong> JavaScript код, демонстриращ бъг в стария <strong>CSSOM</strong><a href="#33c">[33]</a></span>
+<p>Както можем да видим , второто принтене на конзолата не изкарва 0.4, а 0.3.Като преди дори извеждаше и "0.30.1"(конкатенация на стрингове).И в двата случая това не е очакваното поведение</p>
+
+                            </li>
+                            <li><p>Аритметични операции и смяна между мерни единици(Например px - &gt; cm)</p></li>
+                            <li><p>Закръгляне и ограничаване на стойностите</p></li>
+                            <li><p>По-добра производителност(~30% по-бърз от стария CSSOM)</p></li>
+                            <li><p>По-адекватна обработка на грешки</p></li>
+                        </ol>
+                        <h3>Поддръжка от браузърите</h3>
+                       <p>Ако искаме да  проверим дали нашият браузър поддържа CSS Типовият Обектен Модел,можем да го направим чрез следния <strong>JavaScript</strong> код</p>
+                       <pre><code>if(window.CSS && CSS.number){
+console.log(“CSSTOM supported”;
+}</code>
+</pre>
+<span class="example-caption"><strong>Код 34:</strong> JavaScript код, демонстриращ проверка дали браузърът поддържа <strong>CSS Типовият Обектен Модел</strong><a href="#34c">[34]</a></span>
+
+            <h3>Базови знания</h3>
+            <p>Когато говорехме за старият CSSOM, споменахме че има начин както да се манипулират стиловите листи, така и <strong>inline</strong> стиловете на елементите.В новият модел те си имат своите аналози</p>
+            <ul class="mop-list">
+                <li><p><strong>element.style</strong> се замества от <strong>element.attributeStyleMap</strong> </p>
+                <pre><code>var ball = document.getElementById("box");
+ball.attributeStyleMap.set('opacity', 0.3);
+console.log(ball.attributeStyleMap.get("opacity").unit);//"number"</code>
+</pre>
+<span class="example-caption"><strong>Код 35:</strong> JavaScript код, демонстриращ изполване на <strong>attributeStyleMap</strong><a href="#35c">[35]</a></span>
+                </li>
+                <li><p><strong>CSSRule.style</strong> се замества от <strong>CSSRule.StyleMap</strong></p>
+                <pre><code>const stylesheet = document.styleSheets[0];
+stylesheet.cssRules[0].styleMap.set('background', 'blue');</code>
+</pre>
+<span class="example-caption"><strong>Код 36:</strong> JavaScript код, демонстриращ задаването на <strong>'background'</strong> чрез <strong>styleMap</strong><a href="#36c">[36]</a></span>
+                </li>
+            </ul>
+            <p>Новите интерфейси съшо така ни дават и много удобства, например:</p>
+            <pre><code>el.attributeStyleMap.has('opacity')//Можем да проверяваме дали е зададена стойност за някое свойство
+
+el.attributeStyleMap.delete('opacity')//можем да премахваме дадено свойство
+
+el.attributeStyleMap.clear();// можем да премахнем всичи inline стилове на даден елемент</code>
+</pre>
+<span class="example-caption"><strong>Код 37:</strong> JavaScript код, демонстриращ удобствата от използването на <strong>attributeStyleMap</strong><a href="#37c">[37]</a></span>
+<p>Видяхме как се set-ва дадено свойсвто, нека сега видим как се взима дадено свойство.</p>
+
+<pre><code>el.attributeStyleMap.get(‘margin-top’)//CSSUnitValue</code>
+</pre>
+<span class="example-caption"><strong>Код 38:</strong> JavaScript код, демонстриращ <strong>attributeStyleMap.get()</strong> методът<a href="#38c">[38]</a></span>
+    <p>Когато вземем стойност-та на дадено свойство ние взимаме обект, който се състои от две променливи - <strong>unit</strong> и <strong>value</strong>. <strong>Unit</strong> е стринг,който репрезентира мерната единица(px,cm и тн), а <strong>value</strong> е самата стойност.</p>
+    <pre><code>el.attributeStyleMap.set('margin-top', CSS.px(10));
+el.attributeStyleMap.get(‘margin-top’).value//10
+el.attributeStyleMap.get(‘margin-top’).unit//‘px’</code>
+</pre>
+<span class="example-caption"><strong>Код 39:</strong> JavaScript код,демонстриращ <strong>attributeStyleMap.get()</strong> методът,както и <strong>unit</strong> и <strong>value</strong><a href="#39c">[39]</a></span>
+<h3>CSSNumericValue</h3>
+<ol class="mop-list">
+    <li><p><strong>CSSUnitValue</strong> - в себе си съдържа един тип(например "42px")</p>
+        <p>Използва се за прости типове, например 50%.Те могат да се създават директно чрез конструктора CSSUnitValue(), но по често се изпозлват CSS.* фактори методите:</p>
+    <pre><code>CSS.number('10');
+CSS.px(42);
+CSS.vw('100');
+CSS.percent('10');
+CSS.deg(45);
+CSS.ms(300);</code>
+</pre>
+<span class="example-caption"><strong>Код 40:</strong> JavaScript код, репрезенриращ <strong>CSS.* фактори методите</strong><a href="#40c">[40]</a></span>
+</li>
+    <li><p><strong>CSSMathValue</strong> в себе си съдържа повече от един тип</p>
+    <pre><code>new CSSMathSum(CSS.vw(100), CSS.px(-10)).toString(); // "calc(100vw + -10px)"
+
+new CSSMathNegate(CSS.px(42)).toString() // "calc(-42px)"
+
+new CSSMathInvert(CSS.s(10)).toString() // "calc(1 / 10s)"
+
+new CSSMathProduct(CSS.deg(90), CSS.number(Math.PI/180)).toString();
+// "calc(90deg * 0.0174533)"
+
+new CSSMathMin(CSS.percent(80), CSS.px(12)).toString(); // "min(80%, 12px)"
+
+new CSSMathMax(CSS.percent(80), CSS.px(12)).toString(); // "max(80%, 12px)"</code>
+</pre>
+<span class="example-caption"><strong>Код 41:</strong> JavaScript код, <strong>CSSMathValue</strong> интерфейсът<a href="#41c">[41]</a></span>
+<p>На по-горния пример виждаме всички интерфейси,които наследяват CSSMathValue и техните репрезентации.Например CSSMathNegate обръща знака на променливата,подадена му като аргумент. </p>
+    </li>
+</ol>
+<h3>Изчислени стилове</h3>
+<p>В новия CSS Типов Обектен Модел можем да взимаме и изчислени стилове(computed styles).За съжаление то не взима точно изчислените стилове например <strong>width:50%</strong>  не се изчислява в px,а си остава 50%.</p>
+<pre><code>const el = document.getElementById("box");
+el.attributeStyleMap.set('opacity', 0.5);
+console.log(el.computedStyleMap().get('opacity').value);</code>
+</pre>
+<span class="example-caption"><strong>Код 42:</strong> JavaScript код,демонстриращ изпозлването на методът <strong>computedStyleMap()</strong><a href="#42c">[42]</a></span>
+<h3>Аритметични операции</h3>
+<p>Чрез новия обектен модел можем да правим аритметични операции</p>
+<pre><code>CSS.deg(45).mul(2) // {value: 90, unit: “deg”}
+// умножение на 2 числа
+
+CSS.percent(50).max(CSS.vw(50)).toString() // "max(50%, 50vw)” // максимум на две числа
+
+CSS.px(1).add(CSS.px(2)) // {value: 3, unit: “px"}// събиране на две числа
+
+
+CSS.s(1).sub(CSS.ms(200), CSS.ms(300)).toString()//"calc(1s + -200ms + -300ms)"</code>
+</pre>
+<span class="example-caption"><strong>Код 43:</strong> JavaScript код, демонстриращ няколко аритметични операции<a href="#43c">[43]</a></span>
+<h3>Преобразуване между мерните единици</h3>
+<p>Чрез новия обектен модел може да преобразуваме променливи от една величина в друга</p>
+<pre><code>var el = document.getElementById("box");
+el.attributeStyleMap.set('width', '500px');
+const width = el.attributeStyleMap.get('width');
+console.log(width.to('mm').value); // CSSUnitValue {value: 132.29166666666669, unit: "mm"}
+console.log(width.to('cm').value); // CSSUnitValue {value: 13.229166666666668, unit: "cm"}
+console.log(width.to('in').value); // CSSUnitValue {value: 5.208333333333333, unit: "in"}</code>
+</pre>
+<span class="example-caption"><strong>Код 44:</strong> JavaScript код, демонстриращ преобразуването между мерни единици<a href="#44c">[44]</a></span>
+<h3>Равенсто</h3>
+
+<pre><code>const width = CSS.px(200);
+CSS.px(200).equals(width) // true</code>
+</pre>
+<span class="example-caption"><strong>Код 45:</strong> JavaScript код, демонстриращ сравняването<a href="#45c">[45]</a></span>
+<p>equals методът сравнява две числа и ако те си съвпадат връща true, false иначе,като типовете на двете променливи трябва да се еднакви</p>
+<pre><code>const width = CSS.px(500);
+console.log(CSS.mm(132.29166666666669).equals(width)); // false</code>
+</pre>
+<span class="example-caption"><strong>Код 46:</strong> JavaScript код, демонстриращ спецификите на <strong>equals</strong> методът<a href="#46c">[46]</a></span>
+<p>В горния пример и двата CSSUnitValue обекта имат еднакви дължини, но типовете им са различни, затова функцията връща false</p>
+<h3>CSS Трансформации</h3>
+<p>Трансформации чрез новия CSS Типов Обектен Модел се правят чрез CSSTransformValue,като му се подава масив от различни обект, като например CSSRotate, CSSScale и тн.</p>
+<div class="example-container">
+<div class="output" id="measurer">0</div>
+<div class="anonce">
+    <ol class="mop-list-out">
+        <li>Сложи мишката си над кубчето</li>
+        <li>Започва да се върти!</li>
+        <li>Махни си мишката</li>
+        <li>Спира да се върти</li>
+        <li>Ооо уау, има бутон за рестартине??</li>
+    </ol>
+</div>
+<div class="cube-example">
+<div id="box"class="rotate"></div>
+<button id="box-button" class="rotate-button">Reset</button>
+</div>
+</div>
+<pre><code>const box = document.getElementById("box");
+const button = document.getElementById("box-button");
+const measurer = document.getElementById("measurer");
+button.addEventListener("click",function() {
+transform[0].angle.value = 0;
+box.attributeStyleMap.set('transform', transform); // commit it.
+measurer.innerHTML = "0";
+
+});
+const rotate = new CSSRotate(0, 0, 1, CSS.deg(0));
+const transform = new CSSTransformValue([rotate]);
+
+box.attributeStyleMap.set('transform', transform);
+
+let animationId; // declare animationId outside of event listeners
+
+box.addEventListener('mouseenter', function() {
+    // start animation on mouse enter
+    animationId = requestAnimationFrame(function animate() {
+    box.attributeStyleMap.set('background-color','green');
+    transform[0].angle.value += 5; // Update the transform's angle.
+    box.attributeStyleMap.set('transform', transform); // commit it.
+    animationId = requestAnimationFrame(animate); // schedule next animation frame
+    measurer.innerHTML = "Rotating " + transform[0].angle;
+    });
+});
+
+box.addEventListener('mouseleave', function() {
+    // stop animation on mouse leave
+    cancelAnimationFrame(animationId);
+    measurer.innerHTML =  transform[0].angle;
+    animationId = null;
+    box.attributeStyleMap.set('background-color','red');
+});
+console.log(button.attributeStyleMap.has('opacity'));</code>
+</pre>
+<span class="example-caption"><strong>Код 47:</strong> JavaScript код на въртящо се кубче<a href="#47c">[47]</a></span>
+
+                </section>
+            </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+
+        <script>hljs.highlightAll();</script>
+        <section>
+            <h2 id="14s">4. Заключение</h2>
+            <p>Като цяло CSSOM и CSS Typed Object Model внасят значителни подобрения в начина, по който разработчиците работят със CSS стилове. Те дават възможност на разработчиците да манипулират динамично стилове, да имат достъп до изчислени стойности и да работят с въведени CSS стойности по по-стабилен, поддържаем и ефективен начин. Тези подобрения допринасят за по-безпроблемна интеграция на CSS и JavaScript, като допълнително подобряват възможностите и гъвкавостта на уеб разработката.</p>
+            
+        </section>
+        <section class="code">
+            <h2 class="mv" id="15s">5. Списък с програмен код</h2>
+            <ol class="mop">
+                <li>
+                    <div id="1c"><strong>Код 1:</strong> Достъпване на 'background-color' CSS свойсвто </div>
+                    Източник : <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style</a>
+                </li>
+                <li>
+                    <div id="2c"><strong>Код 2:</strong> Задаване на стойност и логване в конзолата</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style</a>
+                    
+                </li>
+                <li>
+                    <div id="3c"><strong>Код 3:</strong> Извикване на style върху елемент,който няма дефиниран <strong> inline</strong> стил</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-inline-styles-via-element-style</a>
+                </li>
+                <li>
+                    <div id="4c"><strong>Код 4:</strong> Код за топче</div>
+                    Източник: <a href="https://www.kirupa.com/html5/getting_mouse_click_position.htm">https://www.kirupa.com/html5/getting_mouse_click_position.htm</a>
+                </li>
+                <li>
+                    <div id="5c"><strong>Код 5:</strong> Логване в конзолата на изчисления стил</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles</a>
+                </li>
+                <li>
+                    <div id="6c"><strong>Код 6:</strong> Начини за достъпване на свойство чрез <strong>window.getComputedStyle()</strong></div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles</a>
+                </li>
+                <li>
+                    <div id="7c"><strong>Код 7:</strong> Извикване на методът <strong>getComputedStyle()</strong> в предишни версии на <strong>Firefox</strong></div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles-of-pseudo-elements">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles-of-pseudo-elements</a>
+                </li>
+                <li>
+                    <div id="8c"><strong>Код 8:</strong> Достъпване на <strong>псевдо-елементи</strong></div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles-of-pseudo-elements">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-getting-computed-styles-of-pseudo-elements</a>
+                </li>
+                <li>
+                    <div id="9c"><strong>Код 9:</strong> Използване на <strong>disabled</strong> променлива</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/disabled#value">https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/disabled#value</a>
+                </li>
+                <li>
+                    <div id="10c"><strong>Код 10:</strong> Използване на <strong>href</strong> променлива</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/href#examples">https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/href#examples</a>
+                </li>
+                <li>
+                    <div id="11c"><strong>Код 11:</strong> Използване на <strong>ownerNode</strong> свойство</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/ownerNode#examples">https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/ownerNode#examples</a>
+                </li>
+                <li>
+                    <div id="12c"><strong>Код 12:</strong> Използване на <strong>title</strong> променлива </div>
+                    Източник: <a href="http://help.dottoro.com/ljuhsqla.php">http://help.dottoro.com/ljuhsqla.php</a>
+                </li>
+                <li>
+                    <div id="13c"><strong>Код 13:</strong> Използване на <strong>CSSStyleSheet()</strong> конструктор</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/CSSStyleSheet#sharing_stylesheets_with_a_shadow_dom">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/CSSStyleSheet#sharing_stylesheets_with_a_shadow_dom</a>
+                </li>
+                <li>
+                    <div id="14c"><strong>Код 14:</strong> Използване на <strong>cssRules</strong> променлива</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/cssRules#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/cssRules#examples</a>
+                </li>
+                <li>
+                    <div id="15c"><strong>Код 15:</strong> Взимане на правило от стилов лист</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText#examples</a>
+                </li>
+                <li>
+                    <div id="16c"><strong>Код 16:</strong> CSS код нужен за демонстрацията по-долу</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples</a>
+                </li>
+                <li>
+                    <div id="17c"><strong>Код 17:</strong> JavaScript код ,показващ вложеното правило</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples</a>
+                </li>
+                <li>
+                    <div id="18c">
+                        <strong>Код 18:</strong> JavaScript код ,показващ нагледно <strong>parentRule</strong> променливата</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/parentRule#examples</a>
+                </li>
+                <li>
+                    <div id="19c"><strong>Код 19:</strong> JavaScript код ,показващ <strong>type</strong> променливата.</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-accessing-keyframes-rules-with-the-cssom">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-accessing-keyframes-rules-with-the-cssom</a>
+                </li>
+                <li>
+                    <div id="20c"><strong>Код 20:</strong> JavaScript код ,показващ <strong>selectorText</strong> променливата.</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/selectorText#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/selectorText#examples</a>
+                </li>
+                <li>
+                    <div id="21c"><strong>Код 21:</strong> CSS код, необходим за примера по-долу.</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style#examples</a>
+                </li>
+                <li>
+                    <div id="22c"><strong>Код 22</strong> JavaScript код ,показващ <strong>style</strong> променливата</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style#examples</a>
+                </li>
+                <li>
+                    <div id="23c"><strong>Код 23</strong> JavaScript код ,показващ <strong>cssRules</strong> променливата</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/cssRules#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule/cssRules#examples</a>
+                </li>
+                <li>
+                    <div id="24c"><strong>Код 24:</strong> JavaScript код ,показващ <strong>deleteRule()</strong> методът</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-adding-and-removing-css-declarations">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-adding-and-removing-css-declarations</a>
+                </li>
+                <li>
+                    <div id="25c"><strong>Код 25:</strong> JavaScript код ,показващ <strong>insertRule()</strong> методът</div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-adding-and-removing-css-declarations">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-adding-and-removing-css-declarations</a>
+                </li>
+                <li>
+                    <div id="26c"><strong>Код 26:</strong>CSS код</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/name#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/name#examples</a>
+                </li>
+                <li>
+                    <div id="27c"><strong>Код 27:</strong> Javascript код ,демонстриращ <strong>name</strong> променливата</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/name#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/name#examples</a>
+                </li>
+                <li>
+                    <div id="28c"><strong>Код 28:</strong> CSS код</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/appendRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/appendRule#examples</a>
+                </li>
+                <li>
+                    <div id="29c"><strong>Код 29:</strong> JavaScript,демонстриращ <strong>appendRule()</strong> методът</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/appendRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/appendRule#examples</a>
+                </li>
+                <li>
+                    <div id="30c"><strong>Код 30:</strong> JavaScript,демонстриращ <strong>deleteRule()</strong> методът</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/deleteRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/deleteRule#examples</a>
+                </li>
+                <li>
+                    <div id="31c"><strong>Код 31:</strong> JavaScript,демонстриращ <strong>findRule()</strong> методът</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/findRule#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule/findRule#examples</a>
+                </li>
+                <li>
+                    <div id="32c"><strong>Код 32:</strong> JavaScript,демонстриращ <strong>keyText</strong> променливата</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframeRule/keyText#examples">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframeRule/keyText#examples</a>
+                </li>
+                <li>
+                    <div id="33c"><strong>Код 33:</strong> JavaScript код, демонстриращ бъг в стария <strong>CSSOM</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#benefits">https://developer.chrome.com/blog/cssom/#benefits</a>
+                </li>
+                <li>
+                    <div id="34c"><strong>Код 34:</strong> JavaScript код, демонстриращ проверка дали браузърът поддържа <strong>CSS Типовият Обектен Модел</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#browser-support-feature-detection">https://developer.chrome.com/blog/cssom/#browser-support-feature-detection</a>
+                </li>
+                <li>
+                    <div id="35c"><strong>Код 35:</strong> JavaScript код, демонстриращ изполване на <strong>attributeStyleMap</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#browser-support-feature-detection">https://developer.chrome.com/blog/cssom/#browser-support-feature-detection</a>
+                </li>
+                <li>
+                    <div id="36c"><strong>Код 36:</strong> JavaScript код, демонстриращ задаването на <strong>'background'</strong> чрез <strong>styleMap</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#new-css-typed-om">https://developer.chrome.com/blog/cssom/#new-css-typed-om</a>
+                </li>
+                <li>
+                    <div id="37c"><strong>Код 37:</strong> JavaScript код, демонстриращ удобствата от използването на <strong>attributeStyleMap</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#new-css-typed-om">https://developer.chrome.com/blog/cssom/#new-css-typed-om</a>
+                </li>
+                <li>
+                    <div id="38c"><strong>Код 38:</strong> JavaScript код, демонстриращ <strong>attributeStyleMap.get()</strong> методът</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#new-css-typed-om">https://developer.chrome.com/blog/cssom/#new-css-typed-om</a>
+                </li>
+                <li>
+                    <div id="39c"><strong>Код 39:</strong> JavaScript код,демонстриращ <strong>attributeStyleMap.get()</strong> методът,както и <strong>unit</strong> и <strong>value</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#accessing-styles">https://developer.chrome.com/blog/cssom/#accessing-styles</a>
+                </li>
+                <li>
+                    <div id="40c"><strong>Код 40:</strong> JavaScript код, репрезенриращ <strong>CSS.* фактори методите</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#unit-values">https://developer.chrome.com/blog/cssom/#unit-values</a>
+                </li>
+                <li>
+                    <div id="41c"><strong>Код 41:</strong> JavaScript код, <strong>CSSMathValue</strong> интерфейсът</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#math-values">https://developer.chrome.com/blog/cssom/#math-values</a>
+                </li>
+                <li>
+                    <div id="42c"><strong>Код 42:</strong> JavaScript код,демонстриращ изпозлването на методът <strong>computedStyleMap()</strong></div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#computed-styles">https://developer.chrome.com/blog/cssom/#computed-styles</a>
+                </li>
+                <li>
+                    <div id="43c"><strong>Код 43:</strong> JavaScript код, демонстриращ няколко аритметични операции</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#basic-operations">https://developer.chrome.com/blog/cssom/#basic-operations</a>
+                </li>
+                <li>
+                    <div id="44c"><strong>Код 44:</strong> JavaScript код, демонстриращ преобразуването между мерни единици</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#conversion">https://developer.chrome.com/blog/cssom/#conversion</a>
+                </li>
+                <li>
+                    <div id="45c"><strong>Код 45:</strong> JavaScript код, демонстриращ сравняването</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#equality">https://developer.chrome.com/blog/cssom/#equality</a>
+                </li>
+                <li>
+                    <div id="46c"><strong>Код 46:</strong> JavaScript код, демонстриращ спецификите на <strong>equals</strong> методът</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#equality">https://developer.chrome.com/blog/cssom/#equality</a>
+                </li>
+                <li>
+                    <div id="47c"><strong>Код 47:</strong> JavaScript код на въртящо се кубче</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#example-animating-a-cube">https://developer.chrome.com/blog/cssom/#example-animating-a-cube</a>
+                </li>
+
+            </ol>
+        </section>
+        <section class="figures">
+            <h2 class="mv" id="16s">6. Списък с фигури</h2>
+            <ol class="mop">
+                <li>
+                    <div id="1f"><strong>Фигура 1: </strong>Critical rendering path</div>
+                    Източник: <a href="https://www.lambdatest.com/blog/css-object-model/">https://www.lambdatest.com/blog/css-object-model/</a>
+                </li>
+                <li>
+                    <div id="2f"><strong>Фигура 2: </strong>Render tree</div>
+                    Източник: <a href="https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity">https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity</a>
+                </li>
+                <li>
+                    <div id="3f"><strong>Фигура 3: </strong>Render tree резултат</div>
+                    Източник: <a href="https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity">https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity</a>
+                </li>
+            </ol>
+        </section>
+        <section class="sources">
+            <h2 class="mv" id="17s">7. Цитирана литература</h2>
+            <ol class="mop-list">
+                <li>
+                    <div id="1i">[51] Eric Bidelman,"Working with the new CSS Typed Object Model",публикувано на Понеделник, Март 26, 2018,последна промяна на Петък,Юли 24,2020,последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.chrome.com/blog/cssom/#example-animating-a-cube">https://developer.chrome.com/blog/cssom/#example-animating-a-cube</a>
+                </li>
+                <li>
+                    <div id="2i">[52] Alex Anie,"A Beginner’s Guide To CSS Object Model (CSSOM)",публикувано на Март 14,2023,последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://www.lambdatest.com/blog/css-object-model/">https://www.lambdatest.com/blog/css-object-model/</a>
+                </li>
+                <li>
+                    <div id="3i">[53] MDN,последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Glossary/CSSOM">https://developer.mozilla.org/en-US/docs/Glossary/CSSOM</a>
+                </li>
+                <li> <div id="4i">[54] MDN,последно посетен на 30.05.2023</div>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model">https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model</a>
+                </li>
+                <li><div id="5i">[55] Udacity,"The Render Tree - Website Performance Optimization",качено на Февруари 23,2015,последно посетено на 30.05.2023</div>
+                Източник: <a href="https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity">https://www.youtube.com/watch?v=lvb06W_VKVE&ab_channel=Udacity</a>
+                </li>
+                <li>
+                    <div id="6i">[56] Navdeep Singh Gill,"How the Web Browser Renders the Pages with DOM CSSOM?",публикувано на Януари 10,2022,последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://www.xenonstack.com/blog/web-browser-renders">https://www.xenonstack.com/blog/web-browser-renders</a>
+                </li>
+                <li><div id="7i">[57] MDN,"CSSStyleDeclaration",последно посетен на 30.05.2023</div>
+                Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration</a>
+                </li>
+                <li>
+                    <div id="8i">[58] MDN,"StyleSheetList",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList">https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList</a>
+                </li>
+                <li>
+                    <div id="9i">[59] MDN,"StyleSheet",последено посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet">https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet</a>
+
+                </li>
+                <li>
+                    <div id="10i">[60] MDN,"CSSStyleSheet",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet</a>
+                </li>
+                <li>
+                    <div id="11i">[61] MDN,"CSSRuleList",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList">https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList</a>
+                </li>
+                <li>
+                    <div id="12i">[62] MDN,"CSSRule",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule</a>
+
+                </li>
+                <li>
+                    <div id="13i">[63] MDN,"CSSStyleRule",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule">https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule</a>
+                </li>
+                <li>
+                    <div id="14i">[64] MDN,"CSSGroupingRule",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule">https://developer.mozilla.org/en-US/docs/Web/API/CSSGroupingRule</a>
+                </li>
+                <li>
+                    <div id="15i">[65] MDN,"CSSKeyframesRule",последно посетен на 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule</a>
+                </li>
+                <li>
+                    <div id="16i">[66] MDN,"CSSKeyframeRule",последно посетен ан 30.05.2023</div>
+                    Източник: <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframeRule">https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframeRule</a>
+                </li>
+                <li>
+                    <div id="17i">[67] Louis Lazaris , "An Introduction and Guide to the CSS Object Model (CSSOM)",публикувано на Декември 10, 2018,последно посетен на 30.05.2023
+                    </div>
+                    Източник: <a href="https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-working-with-a-stylesheet-object">https://css-tricks.com/an-introduction-and-guide-to-the-css-object-model-cssom/#aa-working-with-a-stylesheet-object</a>
+                    
+                </li>
+
+            </ol>
+        </section>
+        <section>
+            <h2 class="special">Изготвил:</h2>
+            <span class="made">Роберт Георгиев Борисов,фн:62529,Група 1</span>
+        </section>
+    </div>
+</body>
+
+
+
+
+
+
+
+</html>
