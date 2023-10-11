@@ -401,6 +401,47 @@ f1 f2 f3 asdf
 
 - **Решение:**
 ```bash
+  1 #/bin/bash
+  2 if [[ "$#" -ne 1 ]]; then
+  3     echo "Wrong usage: Only 1 parameter needed < directory>"
+  4     exit 1
+  5 fi
+  6 directory="${1}"
+  7 found=false
+  8 currentIndex=0
+  9 declare -a array
+ 10 while read filename; do
+ 11     if [[ ${#array[@]} -eq 0  ]]; then
+ 12         array[0]="$filename"
+ 13         echo "adding first element to array $filename"
+ 14     else
+ 15         found=false
+ 16         currentIndex=0
+ 17         for file in "${array[@]}"; do
+ 18             if cmp -s "$file" "$filename"; then
+ 19                 found=true
+ 20                 if [[ "$filename" < "$file" ]]; then
+ 21                     array[$currentIndex]="$filename"
+ 22                     rm "$file"
+ 23                     break
+ 24                 else
+ 25                     rm "$filename"
+ 26                     break
+ 27                 fi
+ 28             else
+ 29                 currentIndex=$((currentIndex+1))
+ 30             fi
+ 31         done
+ 32         if [[ "$found" == "false" ]]; then
+ 33             array[${#array[@]}]="$filename"
+ 34         fi
+ 35     fi
+ 36 echo ""
+ 37 echo "after $filename --------------"
+ 38 echo "${array[@]}"
+ 39 echo ""
+ 40
+ 41 done < <(find "$directory" -mindepth 1 -maxdepth 1 -type f)
 ```
 ## 05-b-6800.txt 
 - **Условие:**<br/>
