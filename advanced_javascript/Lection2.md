@@ -129,10 +129,10 @@ function getNaturalNumber(){
     вместо fn(counter - > counter=fn(counter;))
 }
 ```
-![image](/Users/robertborisov/UNI/advanced_javascript/image.jpeg)
+![image](./image.jpeg)
 това тук ще гръмне(долното)
 Function declaration sa dostupni abs ot nachaloto,a function declaration veche kogato e = na edi si kwo
-![image](/Users/robertborisov/UNI/advanced_javascript/image3.jpeg) това тук ще гръмне
+![image](./image3.jpeg) това тук ще гръмне
 
 ```
 function myFunction2(){
@@ -151,7 +151,9 @@ var context = {
 };
 context.fun();
 ```
-![image](/Users/robertborisov/UNI/advanced_javascript/image3 2.jpeg)
+![image](./image4.jpeg)
+![image](./image6.jpeg)
+![image](./Image7.jpeg) //IIFE
 ## **Questions**
 - Service buss?
 - Защо има нужда да пишем име на генератора? - > за да може като дебъгваме да виждаме откъде идва самото нещо , иначе ще ни пише anonymous(за да знаем къде се намираме като дебъгваме)
@@ -160,3 +162,4 @@ context.fun();
 - каква е разликата между контекст и област на видимост? област на видимост е променливите които виждаме във функцията
 ## **Линкове**
 https://gist.github.com/stelf/6c768875e174085c0e3ce43b564fc0bd
+- function (...args){}
