@@ -10,7 +10,7 @@ python - gil -> global interpreter log </br>
 - в JS няма block-scoping,имаме function scoping,тоест функциите ни създават нова област на видимост
 ```
 var a = 10;
-if (true){
+if (true){  
     var b = 30;
     console.log(a);
 }
