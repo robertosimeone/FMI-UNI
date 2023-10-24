@@ -19,3 +19,5 @@ class ComplexNumber:
 cn = ComplexNumber(1,-2)
 dn = ComplexNumber(1,2)
 print(cn)
+//python3.6 -m pip install seaborn
+
