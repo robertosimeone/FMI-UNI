@@ -1,0 +1,21 @@
+#!/bin/bash
+if [[ $# -gt 2 ]] || [[ $# -eq 0 ]];then
+echo "wrong number of arguments given"
+exit 2
+fi
+if[[ $# -eq 1 ]];then
+	if [[ -n "$1" ]];then
+	find . - type l  -printf "%p %Y\n" | grep " N$" | cut -d ' ' -f1
+	else
+	 echo "Empty string or non string  given!"
+	 exit 1
+	fi
+fi
+if[[ $# -eq 2 ]];then
+if [[ ${2} ~= ^[0-9]+$ ]];then
+	find . -type f -printf "%p %n\n" | awk '$2 > 3{print $1}'
+else
+ echo "The second argument is not an integer"
+ exit 3
+fi
+exit 0;

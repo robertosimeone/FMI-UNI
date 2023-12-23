@@ -1,0 +1,63 @@
+							Упражнение при Радо - > 21 - 11 - 23 
+Аритметика
+ - чрез вградени конструкции
+	A = $((3 + 5))
+ - с външни програми
+	 echo "scale = 2; 5/2" - > трябва да се подаде специалната променлива scale
+	 echo "scale = 2; 5 / 	2" | bc
+	expr
+grep ima problem pri ".*
+primerno if cat/etc/passwd | cut -d -f .. | grep "^{$}$"
+grep -F e dosta polezno(interpretira )
+regex injection - > da ne se sluchi
+fixed string ne bachka s $ i ^
+towa ne e mn dobro reshenie zashtoto moje da se podade nqkakyw podstirng
+Kak da proverim dali skriptut se izpulnqva ot root
+if [$(whoami) != "root"];then
+exit
+fi
+moje da imame exit bez chislo ( prosto ne printi nishto)
+vinagi tr da imame "" okolo towa zashtoto ako napishem samo $(whoami) i whoami vurne prazen string shte stane towa if [[!= "root"]
+]
+22 zadacha pravim
+FOO =  ${1}
+FOOPCount = $(ps -u $FOO -o time= | wc - l)
+for U in $(cat /etc/passwd | cut -d: -f 1); do
+	UPCOUNT = $(ps -u $U -o time= | wc -l)
+	if [["${UPCOUNT}" -gt "${FOOPCOUNT}"]];then
+		echo ..
+	fi
+b)
+while read HOURS MINUTES SECONDS; do
+	echo
+done < < (ps -e -o time = | tr ":" ' ')
+kak da chetem ot standartniq vhod script?
+:term - > v script cmd prompt
+ako imame primer 01 minuti - > bc e dostatuchno umen i se sprawq
+second = $(echo ... | bc)
+totalseconds = $(($totalsecond  + $seconds))
+count = $((COUNT  + 1))
+
+
+..
+echo "scale  = 2 ..." | bc
+trqbva da proverim dali ima 0 procesa, no nqma kak tova da stane  zashtoto nie samite izpulnqwame programa
+ako imame $(($COUNT + $SECONDS)) - > ako $seconds  = 09 basha misli che e 8 broina sistema
+
+kill -9 <pid>
+
+stat zaduljitelno da ima na pishtova na izpita
+hardlinkove -
+find -printf "%n"
+stat -c "%h"
+
+kak da viidm che edin symlink e schupen
+find . -type l | xargs cat
+test -L f6 -> tova ne znam kakvo tochno pravi
+test -f f6 - > tova ne bachka izcqlo
+find %Y
+echo $?
+symlink koito sochi kum sebe si ??
+find . -type l -printf "%Y\n"
+
+24 napravihme vsichko

@@ -1,0 +1,26 @@
+							Solution na zadacha 32
+
+#!/bin/bash
+
+if [[ $# -ne 2 ]]; then
+	echo "Wrong number of arguments given"
+	exit 1
+fi
+if [[ -f "${1}" ]] && [[ -f "${2}" ]];then
+	if [[ "${1}" ~= ^.*\.csv$  ]] && [[ "${2}" ~= ^.*\.*.csv$  ]];then
+		cat "${1}" | sort -t ',' -k 2 | sed -E 's/,/ /' | 	
+	else
+		echo "File extension doesnt match"
+		exit 2
+	fi
+else
+	echo "Either file doesnt exist or it's not a regular one"
+	exit 3
+fi
+
+//drug nachin za reshenie e da zapazim w edna promenliwa vsichki unikalni redove ot 2 kolona natatuk
+posle za vseki red ot unikalnite grepvame sortirame po purvata kolona , vzimam s head purviq i appendvame kum drugiq file
+
+CROWS = $(cat $1 | grep $ROW)
+kak podavame promenliva na while read line 
+done < <(echo $SET)

@@ -1,0 +1,37 @@
+Nai veroqtno moje da gi ima na izpita
+	-basename
+	-realpath
+	-dirname
+	-mktemp - w kraq na skripta tr da gi iztriem
+	-df
+	-du - du task.sh; du -b
+	-du <directory>
+	ima nqkuv minimalen razmer za file, i ponqkogan qkoi komandi ne ni g idavat(toest kakvoto ida sme zapisali w tqh, winagi si ima nqkuw minimalen razmer)
+	- paste
+	- join
+	- date
+	date --date="@1221221" +'%a'
+	date --date='Tomorrow' +'%a'
+Сега за скриптове:
+	Фунцкии
+function a{
+
+
+}
+	break 2- > Ще бреакне 2 пъти
+	
+
+
+
+za zadacha s rowovete ot minaliq put -> 
+echo a b c
+В C се извиква със exec("/usr/bin/echo","a","b","c",NULL);
+echo a\nb c -> dali \n e razdelite?- > podari tozi problem ima IFS
+- komanda ascii
+nqma problem da pazim rezultat ot cat cut... v promenliwi, edinstveniq problem e che se tovari ramta poveche taka
+podal go e bil e taka echo ${ROws} a ne echo "${rows}"
+A = a\nb
+
+
+
+
