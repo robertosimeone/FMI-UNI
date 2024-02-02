@@ -164,7 +164,7 @@ pair <int,int > min_value(string &state,int depth,char & pc_symbol,char & player
 
 void MiniMaxDecision(string &state,char & pc_symbol, char & player_symbol){
     pair<int,int> result = max_value(state,0,pc_symbol,player_symbol,-1,INT_MIN,INT_MAX);
-    cout << "result.first : " << result.first << " result.second : " << result.second << endl;
+//    cout << "result.first : " << result.first << " result.second : " << result.second << endl;
     state[result.second] = pc_symbol;
     updateAssessments(result.second,pc_symbol);
 }

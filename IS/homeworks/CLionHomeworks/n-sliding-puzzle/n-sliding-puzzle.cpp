@@ -261,7 +261,7 @@ int main() {
     }
     bool result = ida_star(currentZeroIndex,guide,steps,moves);
     if(!result)
-        cout << -1;
+        cout << "Unsolvable board" << endl;
     std::clock_t end = std::clock();
     double elapsedSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
     std::cout << elapsedSeconds << " seconds" << std::endl;
@@ -269,3 +269,9 @@ int main() {
     }
 //}
 //implement dynamic moves
+//15
+//-1
+//9 5 1 12
+//10 0 11 13
+//3 7 14 6
+//2 8 15 4 - > cannot calculate this one

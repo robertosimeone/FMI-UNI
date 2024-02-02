@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <sstream>
 //1 point/2 point + cycle crossover
 #include <tuple>
 #include <map>
@@ -11,11 +12,11 @@
 #include <set>
 #include <queue>
 using namespace  std;
-pair<int,int> * coordinates_array;
+pair<double,double> * coordinates_array;
 //queue<string> townNames;
 //for 100 40000 and 16 doesnt work
 
-const int pop_stop = 30000;
+const int pop_stop = 1000;
 double best_distance = INT_MAX;
 int global_counter =0;
 int n;
@@ -24,10 +25,9 @@ double current_best = -1;
 double previous_best = -1;
 int consecutive_best_chromosome_counter = 0 ;
 string * towns;
-const int fixed_population_size = 100;
-const int  goal_distance = 857;
+const int fixed_population_size = 800;
 void generateTownNames(){
-    std::ifstream townNamesFile ("/Users/robertborisov/uni/is/homeworks/CLionHomeworks/tsp/cities.txt");
+    std::ifstream townNamesFile ("/Users/robertborisov/uni/is/homeworks/CLionHomeworks/tsp/UK_TSP/uk12_name.csv");
     string currentName;
     int counter = 0;
     if(townNamesFile.is_open()){
@@ -55,7 +55,7 @@ void generateTownNames(){
 //    }
 //    ~Town() = default;
 //};
-double calculateDistance(int x1,int y1,int x2,int y2){
+double calculateDistance(double x1,double y1,double x2,double y2){
     return sqrt(pow(x2-x1,2)+pow(y2-y1,2));
 }
 class Chromosome{
@@ -101,6 +101,7 @@ class Chromosome{
     void mutate(){
         int firstGene = rand() % size;
         int secondGene = rand() % size;
+//        cout << firstGene << " " << secondGene << endl;
         swap(genes[firstGene],genes[secondGene]);
     }
     void calculateTotalDistance(){
@@ -131,7 +132,7 @@ class Chromosome{
     ~Chromosome() = default;
 };
 void generateTowns(int n){
-    coordinates_array = new pair<int,int>[n];
+    coordinates_array = new pair<double,double>[n];
     for(int i = 0 ; i < n;++i){
         coordinates_array[i].first = rand() % 1000;
         coordinates_array[i].second = rand() % 500;
@@ -157,22 +158,40 @@ void crossover(vector<int>&genes1,vector<int> & genes2,int split){
     nextPopulation.emplace(Chromosome(genes));
 }
 void reproduce(Chromosome & parent1, Chromosome & parent2){
+//    time_t x = time(0);
     int split  = rand() % (n-2) + 1;
+//    cout << "split : " << split << endl;
     crossover(parent1.genes,parent2.genes,split);
     crossover(parent2.genes,parent1.genes,split);
 }
-void generateTownsOnStraightLine(int n){
-    coordinates_array = new pair<int,int>[n];
-    for(int i = 0 ; i < n;++i){
-        coordinates_array[i].first = rand() % 1000;
-        coordinates_array[i].second = 1;
+void generateTownsFromCV(int n){
+    coordinates_array = new pair<double,double>[n];
+    std::ifstream townsXYcsv ("/Users/robertborisov/uni/is/homeworks/CLionHomeworks/tsp/UK_TSP/uk12_xy.csv");
+    string line = "";
+    int counter = 0;
+    string temp;
+    while(townsXYcsv and getline(townsXYcsv,line)){
+        stringstream x_y(line);
+        temp = "";
+        getline(x_y,temp,',');
+        coordinates_array[counter].first = atof(temp.c_str());
+        getline(x_y,temp);
+        coordinates_array[counter].second = atof(temp.c_str());
+        counter++;
+
     }
+//    for(int i = 0 ; i < n;++i){
+//        cout << i  << "i"<<"x : " <<coordinates_array[i].first << " y : " << coordinates_array[i].second << endl;
+//    }
+//    return;
 }
 void initializePopulation(){
     for(int i =0;i < fixed_population_size; ++i){
         Chromosome chromo;
         population.emplace(chromo);
     }
+
+
 }
 void printq(){
     while (!population.empty()){
@@ -209,17 +228,25 @@ void swapQ(){
 void tsp(){
     int t = 1;
     initializePopulation();
+    int inner = 1;
 
 
 
     while(isNotTerminated()){
 //        cout << "t" << t<<endl;
-             if(t == 1 || t == 1000 || t== 3000 || t == 7000 || t == 10000 || t == 14000 || t == 18000 || t == 22000 || t == 27000 || t == 40001) {
+             if(t == 1 || t == 10 || t== 15 || t == 20 || t == 30 || t == 40 || t == 300 || t == 500 || t == 700 || t == 1001) {
 //        for(int i = 0; i < n;i++){
 //            cout << population.top().genes[i] << " ";
 //        }
 //        cout << endl;
-                 cout << population.top().totalDistance << endl;
+                 cout << inner <<" : "<<population.top().totalDistance << endl;
+                 inner++;
+             }
+             if(t == 2999){
+                 int a = 5;
+
+
+
              }
 
         while(population.size()!=fixed_population_size/2) {
@@ -254,61 +281,32 @@ void tsp(){
 }
 //
 
-void bubbleSort(pair<int,int> * arr, int n)
-{
-    int i, j;
-    bool swapped;
-    for (i = 0; i < n - 1; i++) {
-        swapped = false;
-        for (j = 0; j < n - i - 1; j++) {
-            if (arr[j].first > arr[j + 1].first) {
-                swap(arr[j].first, arr[j + 1].first);
-                swapped = true;
-            }
-        }
-
-        // If no two elements were swapped
-        // by inner loop, then break
-        if (!swapped)
-            break;
-    }
-}
-bool checkMinDistaneLine(){
-    double tspDistance = population.top().totalDistance;
-    double realDistance = 0;
-    bubbleSort(coordinates_array,n);
-    for(int i = 0 ; i < n-1;i++){
-        realDistance+=calculateDistance(coordinates_array[i].first,coordinates_array[i].second,
-                                      coordinates_array[i+1].first,coordinates_array[i+1].second);
-    }
-    cout << "------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-    cout << "OrderedPath" << endl;
-    cout << "x's : ";
-    for(int i = 0 ; i < n;++i){
-        cout <<  coordinates_array[i].first << " ";
-    }
-    cout << "------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-    cout << endl;
-    cout << realDistance << endl;
-    return tspDistance == realDistance;
-}
-
-
 int main() {
-    srand((int) time(0));
+    srand(time(nullptr));
     cin >> n;
-    generateTownsOnStraightLine(n);
+    generateTownNames();
+    generateTownsFromCV(n);
+    std::clock_t start = std::clock();
     tsp();
     vector<int> bestGenes = population.top().genes;
+
+
+    std::clock_t end = std::clock();
+    double elapsedSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    std::cout << elapsedSeconds << " seconds" << std::endl;
+
+
+
     cout << "------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
     cout << "pathFound x's: " << endl;
     for(int i = 0 ; i < n;i++){
-        cout << coordinates_array[bestGenes[i]].first << " ";
+        cout << towns[bestGenes[i]] << endl;
     }
     cout << "------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
     cout << endl;
 
-    cout << checkMinDistaneLine();
+
+//    cout << checkMinDistaneLine();
     delete[] towns;
 
 }

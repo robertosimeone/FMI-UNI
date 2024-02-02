@@ -1,0 +1,12 @@
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/eighth.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/CLionHomeworks.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/first_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/second_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/sixth_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/third_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/bonus.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/fourth_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/seventh_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/fifth_homework.dir
+/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-release/CMakeFiles/edit_cache.dir

@@ -1,0 +1,14 @@
+dirname="${1}"
+current_md5sum = "$(md5sum "${filename}")"
+
+tuka ima li problemi
+
+2)kak da proverim dali dadena promenliva e setnata
+
+
+
+kak da zapazvame rezultate ot funkciq
+
+
+3)za 54 zadacha tova s read na ctrlslots promenliwata
+

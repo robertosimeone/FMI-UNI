@@ -97,7 +97,7 @@ double getTestAccuracy(vector<string>& test){
             int denRepProb = 0;
             for(int i = 0 ; i < 3;i++){
                 denDemProb+= democrats[i][second_counter];
-                denRepProb+=republicans[i][second_counter];
+                denRepProb+= republicans[i][second_counter];
             }
             demProb += log2((double)(democrats[curr_index][second_counter] + 1)/(denDemProb+3));
             repProb += log2((double)(republicans[curr_index][second_counter] + 1)/(denRepProb+3));

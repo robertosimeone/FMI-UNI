@@ -1,0 +1,47 @@
+1)Защо трябва да внимаваме когато записваме стойности на нивозе във файлове?Примера с терминиращата нула и как strlen() е полезен
+
+
+2)uint32_t * buffer = (uint32_t*)malloc(s.st_size)//aloira v heapa
+v c ne ni se pozvolqva da suzdavame  ot promenlivi i zatova se polzwa tova gore
+stacka e kraen resurs i moje da imame overflow,a a heapa raste kolkoto e nujni
+moje da se prochete masiva na vednuj ako sme v dobriq sluchai
+
+
+3)Оказва се че оная задача 81 дето от stdin wlizat nqkwi neshta si baca, toest  lsed echo -ne "" | ./main kydeto w main се опитваме да прочетем 1 байт си баца, тоест имаме като end of file na echoto
+Защо тогава ми беше казал че не баца оная идея където примерно в някъф буфер примерно 200 chara си слагаме нещата и готово _ > за 81 задача става въпрос
+
+4)        if(pid1 == 0){
+            close(1);
+            close(fds[0]);
+            dup(fds[1]);
+            execlp(...)
+        }
+
+
+        pid2 = fork();
+        if(pid 2 == 0){
+            close(0);
+            close(f[1])
+            dup(fds[0])
+            execlp(...)
+        }
+
+Pitai kato dupvame fajlow deskripto nali poluchavame 2 kopiq i posle ako zatworim ediniq i drugiq li e maha
+
+
+koe e po pravilno read...!=sizeof() ili >0
+
+Кога read блокира и кога спира да чете?
+
+какво значи на задача 59 че файловете са неконсистентни
+
+Ще има ли проблеми ако не използваме онова с errno deto се swapva като затваряме с close();.Дали ще има въобще проблеми ако не затваряме с close()
+
+
+Като записване някаква структура във файл дали нейните байтове се подреждат както ако бяхме записали по отделно всеки един член на структурата? или се мешат
+
+
+Дали е добре да се преизползват структури ? тоест оная задача с patch(60);
+
+
+накрая на файла се слага по някаква причина нов ред??
