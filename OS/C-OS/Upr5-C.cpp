@@ -28,6 +28,7 @@ int main(int argc, char ** argv){
     pipe(pipds);
     if(pipds[0] == -1 || pipids[1] == -1){
         err(2,"Pipe couldnt init!")
+
     }
     int main_fd = open(argv[1],)
 
@@ -63,6 +64,8 @@ onemask = 0000 0000 0000 0010
    mask                    byte            Result
 1000 0000          orig=  1011 0110      0000 0000 0000 0000
                           1              0000 0000 0000 0010
+                                         0000 0000 0000 1000
+                                         0000 0000 0000 0001
 
                                         
 mask >> 1               ORIG&mask       r = (r<<2) | zeromask

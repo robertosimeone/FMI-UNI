@@ -15,21 +15,33 @@ public:
 
     string a;
 };
+
+bool binarySearch(int arr[],int element,int size) {
+    int l, r,middle;
+    r = size-1;
+    l = 0;
+    while(l<=r){
+        middle = (l+r)/2;
+        if(arr[middle] == element)
+            return true;
+        if(arr[middle]>element)
+            r = middle-1;
+        else
+            l=middle+1;
+    }
+    return false;
+}
 int main() {
 
- uint32_t arr [2][3] = {};
- uint32_t arr1[3] = {3,4,5};
- for(int i = 0 ; i < sizeof(arr1)/sizeof(arr1[0]);i++){
-     arr[0][i] = arr1[i];
-
- }
-
-
- for(int i =0 ; i < 3;i++){
-     cout << arr[0][i]  << " ";
-
- }
+int arr[] = {1,2,10,12,15,17};
+int size = sizeof (arr)/sizeof(arr[0]) ;
+if(binarySearch(arr,17,size))
+    cout << "Found it";
+else
+    cout << "not found";
 
 
 
-   }
+
+
+}
