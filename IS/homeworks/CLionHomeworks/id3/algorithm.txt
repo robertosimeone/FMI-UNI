@@ -1,8 +1,0 @@
-ed a node structure
-Need a tree structure
-for every single node i need to know the condition
-for every single node i need to know the table and count of every single thing in order to calculate gain
-if entropy is zero its a leaf node
-if there are less than k samples in a node, it's a leaf and i get the majority decision from the node as the class
-if i dont wanna calculate a new table again just make ls
-

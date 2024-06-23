@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <string>
+using namespace std;
 std::vector<std::vector<char> > availableBoards_generate(std::vector<char>& board) {
     int emptyIndex = 0;
     while (board[emptyIndex] != '_') {
@@ -37,7 +39,14 @@ bool isSolved(std::vector<char>& board) {
     }
     return true;
 }
+vector<char> reversed_board(vector<char> _board){
+    vector<char>reversed;
+    for(int i = _board.size()-1 ; i>=0;i++){
+        reversed.push_back(_board[i]);
 
+    }
+    return reversed;
+}
 bool frogLeap(std::vector<char>& board, int emptyIndex, std::vector<std::vector<char> >& stack) {
     if (isSolved(board)) {
         return true;
@@ -54,19 +63,27 @@ bool frogLeap(std::vector<char>& board, int emptyIndex, std::vector<std::vector<
 
 
 void frogLeapCalculation(int n) {
-    std::clock_t start = std::clock();
     std::vector<char> board;
     for (int i = 0; i < n; i++) {
         board.push_back('>');
     }
     board.push_back('_');
+
     for (int i = 0; i < n; i++) {
         board.push_back('<');
     }
+    std::vector<char> starting_board = board;
+
+    cout <<endl;
     std::vector<std::vector<char> > stack;
+    std::clock_t start = std::clock();
     frogLeap(board, n, stack);
+    stack.push_back(starting_board);
+    std::clock_t end = std::clock();
+    double elapsedSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    std::cout << elapsedSeconds << " seconds" << std::endl;
     std::cout << stack.size() << std::endl;
-    std::cout << "RL_RR" << std::endl;
+//    std::cout << "RL_RR" << std::endl;
     for (int i = stack.size() - 1; i >= 0; i--) {
         const auto& currentBoard = stack[i];
         for (char c : currentBoard) {
@@ -74,9 +91,6 @@ void frogLeapCalculation(int n) {
         }
         std::cout << std::endl;
     }
-    std::clock_t end = std::clock();
-    double elapsedSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    std::cout << elapsedSeconds << " seconds" << std::endl;
 }
 
 int main() {

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xsl_ver1.xsl"?>
+<!DOCTYPE catalog SYSTEM "dtd_ver1.dtd" [
+		<!ENTITY Aheloi_qzovir SYSTEM "dams_pictures/Aheloi_qzovir.jpg" NDATA jpg>
+		<!ENTITY Conevo_qzovir SYSTEM "dams_pictures/Conevo_qzovir.jpg" NDATA jpg>
+		<!ENTITY Iskur_qzovir SYSTEM "dams_pictures/Iskur_qzovir.jpg" NDATA jpg>
+		<!ENTITY Jovkovci_qzovir SYSTEM "dams_pictures/Jovkovci_qzovir.jpg" NDATA jpg>
+		<!ENTITY Ogosta_qzovir SYSTEM "dams_pictures/Ogosta_qzovir.jpg" NDATA jpg>
+		<!ENTITY Srechenska_bara_qzovir SYSTEM "dams_pictures/Srechenska_bara_qzovir.jpg" NDATA jpg>
+		<!ENTITY Studen_kladenets_qzovir SYSTEM "dams_pictures/Studen_kladenets_qzovir.jpg" NDATA jpg>
+		<!ENTITY Studena_qzovir SYSTEM "dams_pictures/Studena_qzovir.jpg" NDATA jpg>
+		<!ENTITY dolnopasarelskiManastir SYSTEM "near_places/dolnopasarelskiManastir.jpg" NDATA jpg>
+		<!ENTITY durvoSlona SYSTEM "near_places/durvoSlona.jpg" NDATA jpg>
+		<!ENTITY kastraAdMontezium SYSTEM "near_places/kastraAdMontezium.jpg" NDATA jpg>
+		<!ENTITY klisurskiManastir SYSTEM "near_places/klisurskiManastir.jpg" NDATA jpg>
+		<!ENTITY peshteraJivataVoda SYSTEM "near_places/peshteraJivataVoda.jpg" NDATA jpg>
+		<!ENTITY roqshkiSkalenManastir SYSTEM "near_places/roqshkiSkalenManastir.jpg" NDATA jpg>
+		<!ENTITY sheitanDere SYSTEM "near_places/sheitanDere.jpg" NDATA jpg>
+		<!ENTITY zlatnaBuchva SYSTEM "near_places/zlatnaBuchva.jpg" NDATA jpg>
+
+]>
+<catalog>
+	<regions>
+		<region id="SW" name="South West"/>
+		<region id="NW" name="North West"/>
+		<region id="NC" name="North Central"/>
+		<region id="NE" name="North East"/>
+		<region id="SE" name="South East"/>
+		<region id="SC" name="South Central"/>
+	</regions>
+	<rivers>
+		<river id="ISKR_RIV" name="река Искър"/>
+		<river id="Ogosta_RIV" name="река Огоста"/>
+		<river id="Burziq_RIV" name="река Бързия"/>
+		<river id="Zlatica_RIV" name="река Златица"/>
+		<river id="Struma_RIV" name="река Струма"/>
+		<river id="Shipochanica_RIV" name="река Щипочаница"/>
+		<river id="Arda_RIV" name="река Арда"/>
+		<river id="Vurbica_RIV" name="река Върбица"/>
+		<river id="Aheloi_RIV" name="река Ахелой"/>
+		<river id="LudaKamchiq_RIV" name="река Луда Камчия"/>
+		<river id="Veselina_RIV" name="река Веселина"/>
+
+	</rivers>
+	<placements>
+		<placement regionID="NW">
+			<dam>
+				<title>Язовир Среченска бара</title>
+				<mainInfo>
+Среченска бара е питеен микроязовир, разположен в близост до село Ягодово. Използва се като водоизточник, захранващ с вода градовете Враца, Монтана, Мездра и Берковица. Водният обем на микроязовира е приблизително 15,5 млн. куб. м. Разполага с помпена и пречиствателна станция за питейна вода. Около водоема е обособена санитарно-охранителна зона, в която влизането е забранено с цел да се предпази от замърсяване. От язовира се разкрива красива гледка към рида Козница на Западна Стара планина и най-високите му части - Тодорини кукли (1785 м надморска височина).
+				</mainInfo>
+				<image href="Srechenska_bara_qzovir"/>
+				<traits>
+					<length>1.6 км</length>
+					<volume>15 500 000 м3</volume>
+					<year>1957-1982г.</year>
+					<altitude>445 м</altitude>
+					<width>0.8 км</width>
+				</traits>
+				<populatedPlace>Монтана</populatedPlace>
+				<nearPlace>
+					<title>Клисурски манастир</title>
+					<distance>3.5 км</distance>
+					<description>Клисурският манастир Св. Св. Кирил и Методий е част от Видинската епархия и се намира в Северозападна България, близо до град Монтана. Клисурският манастир е бил важен духовен център по време на Втората българска държава. Обитаван е от сестринство с майка игуменица монахиня Таисия. От ателието на сестринството може да си вземете изографисани икони по традицията на древната Охридска школа.
+					</description>
+					<image href="klisurskiManastir"/>
+				</nearPlace>
+			</dam>
+			<dam>
+				<title>Язовир Огоста</title>
+				<mainInfo>
+				Язовир Огоста се намира в Северозападна България и е четвъртият по площ и вторият по обем изкуствен водоем в страната. Заема площ от 23,6 кв. км, а общият му обем е 506 млн. куб. м. През 1999 г. водоемът е определен за подходящ за промишлен риболов. Има голямо разнообразие на риба - шаран, каракуда, червеноперка, платика, костур, скобар, мряна, сом, щука. Към днешна дата - водата от язовира почти не се използва за напоителни цели, а най-вече за производство на електрическа енергия в двете водноелектрически централи - Кошарник и Огоста.
+				</mainInfo>
+				<image href="Ogosta_qzovir"/>
+				<damWall>
+					<type>земнонасипна с глинено ядро</type>
+					<length>1 км</length>
+				</damWall>
+				<traits>
+					<length>6.26 км</length>
+					<volume>506 000 000 м3</volume>
+					<year>1958-1986г.</year>
+					<width>2.6 км</width>
+				</traits>
+				<populatedPlace>Монтана</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="Ogosta_RIV">река Огоста</riverTributary>
+					<riverTributary riverID="Burziq_RIV">река Бързия</riverTributary>
+					<riverTributary riverID="Zlatica_RIV">река Златица</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Крепост Кастра ад Монтанезиум</title>
+					<distance>3 км</distance>
+					<description>Крепост Кастра ад Монтанезиум се намира в северозападния край на град Монтана, на хълма Калето, поради което хълмът не е застроен и е запазен като паметник на древната история. Селището датира от праисторически времена. Първите му обитатели са живели през каменно-медната епоха. В по-късен период, селището се обитава от тракийското племе трибали, които построяват крепост за защита от нападатели. По време на Римската империя се изграждат се и поддържат пътища, свързващи Монтана с останалата част на империята, в следствие на което града процъфтява.
+					</description>
+					<image href="kastraAdMontezium"/>
+				</nearPlace>
+			</dam>
+		</placement>
+		<placement regionID="SW">
+			<dam>
+				<title>Язовир Студена</title>
+				<mainInfo>
+Язовир Студена се намира в Западна Витоша, на територията на Област Перник. Изграден е на река Струма в периода 1953-1955 г., като под него остават селата Витошко и Крапец. Използва се като главен източник за водоснабдяване на град Перник и региона. Язовирът е охраняем и е разрешен само риболова - зарибен е с бяла риба, костур, червеноперка и др.
+				</mainInfo>
+				<image href="Studena_qzovir"/>
+				<damWall>
+					<type>бетонна гравитачна</type>
+					<height>53 м</height>
+					<length>268 м</length>
+				</damWall>
+				<traits>
+					<length>1.8 км</length>
+					<volume>25 200 000 м3</volume>
+					<year>1953г.</year>
+					<width>0.77 км</width>
+				</traits>
+				<populatedPlace>Перник</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="Struma_RIV">река Струма</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>пещера Живата вода</title>
+					<distance>4 км</distance>
+					<description>Пещера Живата вода 	се намира близо до с. Боснек, като до нея може да се стигне и от селата Чуйпетлово и Кладница. Височината на входа е едва 1.20 м, но когато се влезе навътре става достатъчно високо, за да може човек да се изправи. В предверието има камък с образ на Богородица, поставен там от местните жители. Но самата пещера е доста кална, а в дъното и има по-голяма зала, от която тръгва и изворът "Жива вода"
+					</description>
+					<image href="peshteraJivataVoda"/>
+				</nearPlace>
+			</dam>
+			<dam>
+				<title>Язовир Искър</title>
+				<mainInfo>
+Искър е най-големият по площ и обем язовир в България. Разположен е на река Искър и се намира между град София и град Самоков. Язовирът се използва за водоснабдяване на столицата и за производство на електроенергия. По брега на язовира са разположени места за къмпинг и отдих. Има възможност за риболов и плаване с лодка.
+				</mainInfo>
+				<image href="Iskur_qzovir"/>
+				<damWall>
+					<type>бетонна-гравитачна</type>
+					<height>74.65 м</height>
+					<length>204 м</length>
+				</damWall>
+				<traits>
+					<length>10.9 км</length>
+					<volume>655 300 000 м3</volume>
+					<year>1956г.</year>
+					<altitude>850 м</altitude>
+					<width>3.38 км</width>
+				</traits>
+				<populatedPlace>Долни Пасарел</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="ISKR_RIV">река Искър</riverTributary>
+					<riverTributary riverID="Shipochanica_RIV">река Шипочаница</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Долнопасарелски манастир Св. св. Петър и Павел</title>
+					<distance>3.5 км</distance>
+					<description>Долнопасарелският манастир Св. св. Петър и Павел се намира край село Пасарел, Столична община. Възниква първоначално като параклис, а по-късно се преустроява в малък манастир. Понастоящем манастирът е недействащ и се руши, но има нужда от реставрация, защото в църквата му, която датира от XIX век, са запазени уникални стенописи.
+					</description>
+					<image href="dolnopasarelskiManastir"/>
+				</nearPlace>
+			</dam>
+		</placement>
+		<placement regionID="SC">
+			<dam>
+				<title>Язовир Студен кладенец</title>
+				<mainInfo>
+Студен кладенец е язовир, който е разположен по течението на река Арда и на границата между общините Кърджали и Крумовград. През 1954 г. започва изграждане на язовира, а през 1958 г. е пуснат в експлоатация. Използва се за регулиране на големия сезонен отток на река Арда, за напояване и за производство на електроенергия. Язовирът е подходящ за водни спортове и риболов.
+				</mainInfo>
+				<image href="Studen_kladenets_qzovir"/>
+				<damWall>
+					<type>бетонна</type>
+					<height>67.5 м</height>
+					<length>338 м</length>
+				</damWall>
+				<traits>
+					<length>25 км</length>
+					<volume>387 800 000 м3</volume>
+					<year>1954-1958г.</year>
+					<altitude>225 м</altitude>
+					<width>1.5 км</width>
+				</traits>
+				<populatedPlace>Кърджали</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="Arda_RIV">река Арда</riverTributary>
+					<riverTributary riverID="Vurbica_RIV">река Върбица</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Шейтан дере</title>
+					<distance>7.5 км</distance>
+					<description>Шайтан дере, наричано още Дяволския каньон, се намира под стената на язовир Студен кладенец, край село Рабово, между Кърджали и Крумовград. Погледната отгоре природната забележителност прилича на лунна пустиня, през която минава река Арда. Каньона е с вулканичен произход и представлява застинала лава от отдавна загасналия вулкан Св. Илия. Шайтан дере се смята за едно от най-красивите места в тази област.
+					</description>
+					<image href="sheitanDere"/>
+				</nearPlace>
+			</dam>
+		</placement>
+		<placement regionID="SE">
+			<dam>
+				<title>Язовир Ахелой</title>
+				<mainInfo>
+Язовир Ахелой, известен още като Батски язовир, се намира по поречието на река Ахелой, край село Каблешково, община Поморие. Язовирът е подходящ за почивка и риболов. Рибният му фонд е от шаран, клен, бял амур, сом, толстолоб, каракуда и червеноперка. Язовирът е известен с това, че през есента, когато водата му е кристална чиста, той става като огледало на заобикалящата го природа и гледката е невероятна.
+				</mainInfo>
+				<image href="Aheloi_qzovir"/>
+				<traits>
+					<length>3 км</length>
+					<volume>12 700 000 м3</volume>
+					<year>1964г.</year>
+					<width>0.32 км</width>
+				</traits>
+				<populatedPlace>Бургас</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="Aheloi_RIV">река Ахелой</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Етнографски комплекс Златната бъчва</title>
+					<distance>3 км</distance>
+					<description>Етнографски комплекс Златната бъчва се намира в село Бата, в Източна Стара планина и представлява атракционно-битов комплекс, състоящ се от две зони. Едната е уличката на занаятите. Там се помещават грънчар, дърворезбар, стан, сувенирен магазин, кът с животни и място за огън за нестинарските танци и амфитеатрално разположени около него места. Другата е ресторантската част за хранене на посетителите, които се посрещат с хляб и сол, под звуците на гайда от момче и момиче във фолклорни носии.
+					</description>
+					<image href="zlatnaBuchva"/>
+				</nearPlace>
+			</dam>
+		</placement>
+		<placement regionID="NE">
+			<dam>
+				<title>Язовир Цонево</title>
+				<mainInfo>
+Язовир Цонево се намира край село Цонево, в Стара планина, на територията на Варненска област. Той е третият по големина язовир в България. Пуснат е в експлоатация през 1974 г. предимно за промишлено водоснабдяване и напояване. Язовирът е използван за отдих, почивка и риболов. Зарибен е със сом, шаран, толстолоб, бял амур, костур и др.
+				</mainInfo>
+				<image href="Conevo_qzovir"/>
+				<damWall>
+					<type>земнонасипна</type>
+					<height>39 м</height>
+					<length>890 м</length>
+				</damWall>
+				<traits>
+					<length>30 км</length>
+					<volume>330 000 000 м3</volume>
+					<year>1974г.</year>
+					<altitude>185</altitude>
+					<width>0.57 км</width>
+				</traits>
+				<populatedPlace>Варна</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="LudaKamchiq_RIV">река Луда Кaмчия</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Рояшки скален манастир</title>
+					<distance>6 км</distance>
+					<description>Рояшкият скален манастир се намира в местността Дженевиз канара, на ръба на Рояшкото плато, на 2км от село Рояк. Според изследователите от 3-5 век той е бил тракийско светилище, а в Средновековието се е превърнал в християнска монашеска обител. И до днес в предверието на манастирската църква могат да се видят надписи, в които се споменават имената на владетелите Михаил Асен и Иван Александър. От двете страни на скалния венец има разположени манастирски килии на няколко нива, а в средата му могат да се видят малки ниши, изпълнявали ролята на гробници.Скалният комплекс е много впечатляващ, но и трудно достъпен.
+					</description>
+					<image href="roqshkiSkalenManastir"/>
+				</nearPlace>
+			</dam>
+		</placement>
+		<placement regionID="NC">
+			<dam>
+				<title>Язовир Йовковци</title>
+				<mainInfo>
+Язовир Йовковци е изграден на 5 км от град Елена, на река Веселика. Той е един от най-големите язовири в България. Кръстен е на село, което е било разрушено при построяването на язовира и е останало на дъното му. Язовирът е подходящ за риболов - зарибен е с над 10 вида риби, за плаване с лодка, за къмпинг и отдих сред природата.Язовирът предлага множество места, с прекрасна гледка - като локация, избрахме леснодостъпно място, водещо до централната част на язовира.
+				</mainInfo>
+				<image href="Jovkovci_qzovir"/>
+				<damWall>
+					<type>каменнонасипна с вертикално глинено ядро</type>
+					<height>66 м</height>
+					<length>256 м</length>
+				</damWall>
+				<traits>
+					<length>12 км</length>
+					<volume>92 179 000 м3</volume>
+					<year>1968-1977г.</year>
+					<width>0.59 км</width>
+				</traits>
+				<populatedPlace>Велико Търново</populatedPlace>
+				<riverTributaries>
+					<riverTributary riverID="Veselina_RIV">река Веселина</riverTributary>
+				</riverTributaries>
+				<nearPlace>
+					<title>Дърво Слона</title>
+					<distance>3.5 км</distance>
+					<description>Дървото Слона е 1300 годишно дърво от вида летен дъб. Височината му е 23 м, а обиколката - 7.5 м. Дървото вече е изсъхнало - няма клони, а само стебло. За късмет обаче наоколо има представители от същия вид. Дървото се намира в защитена местност.
+					</description>
+					<image href="durvoSlona"/>
+				</nearPlace>
+			</dam>
+		</placement>
+	</placements>
+</catalog>

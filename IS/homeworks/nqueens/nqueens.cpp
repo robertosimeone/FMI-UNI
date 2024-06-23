@@ -109,7 +109,7 @@ void randomBoardInitialization(){
 //        n_queens[i] = rand()%boardDimension;
 //        updateMatrixInitially(n_queens[i],i);
 //    }
-//-------------------------------------
+////-------------------------------------
 //    for(int i = 0 ; i < boardDimension;++i){
 //        int currQueenRowIndex = getRowWithMinConflicts(i);
 //        n_queens[i] = currQueenRowIndex;
@@ -184,7 +184,7 @@ int main(){
         return 0;
     }
     else if(boardDimension == 1){
-        cout <<"["<<0<<"]"<<endl;
+        cout <<"["<<0<<"]";
         return 0;
     }
     clock_t start, end;
@@ -206,7 +206,7 @@ int main(){
     }
     else{
         double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-        cout<< setprecision(2) << fixed << time_taken<<endl;
+        cout<< setprecision(2) << fixed << time_taken ;
     }
 
 
