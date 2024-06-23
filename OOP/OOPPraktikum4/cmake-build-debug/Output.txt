@@ -1,5 +1,0 @@
-Magician Deck|4|1|1|2
-Big Tosho.|Kill glavniq|2|2|2
-glaven|kill tosho|1|SPELL
-pend|kill|1|1|1|1|TRAP
-Sineok magiosnik|Kill all.|1|1|1|1|TRAP
