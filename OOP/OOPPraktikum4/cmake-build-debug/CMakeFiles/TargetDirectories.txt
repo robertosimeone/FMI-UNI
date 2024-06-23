@@ -1,0 +1,3 @@
+/Users/robertborisov/CLionProjects/OOPPraktikum4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/robertborisov/CLionProjects/OOPPraktikum4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/robertborisov/CLionProjects/OOPPraktikum4/cmake-build-debug/CMakeFiles/untitled4.dir

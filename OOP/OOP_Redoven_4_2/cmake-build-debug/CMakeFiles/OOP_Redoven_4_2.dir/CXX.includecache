@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Comparable.hpp
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Debug.hpp
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/KeyValueDatabase.cpp
+KeyValueDatabase.hpp
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/KeyValueDatabase.hpp
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/KeyValueDatabase.hpp
+iostream
+-
+utility
+-
+Object.hpp
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Object.hpp
+vector
+-
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Object.hpp
+iostream
+-
+Comparable.hpp
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Comparable.hpp
+Debug.hpp
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Debug.hpp
+Serializable.hpp
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Serializable.hpp
+
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/Serializable.hpp
+iostream
+-
+

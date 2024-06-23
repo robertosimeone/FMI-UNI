@@ -1,0 +1,3 @@
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/robertborisov/CLionProjects/OOP_Redoven_4_2/cmake-build-debug/CMakeFiles/OOP_Redoven_4_2.dir

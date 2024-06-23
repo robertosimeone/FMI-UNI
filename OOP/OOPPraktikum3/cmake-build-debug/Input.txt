@@ -1,0 +1,7 @@
+Magician Deck|2|2|2
+Blue-Eyes White Dragon.|destruction|3000|2500
+word of Revealing Light|cant attack|2500|1000
+ark Magician|ultimate wizard|SPELL
+Magician Cylinder|to its ATK|TRAP
+Timegazer Magician|activate trap|1200|600|8|SPELL
+imegazer Magician|activate trap|1200|600|8|SPELL
