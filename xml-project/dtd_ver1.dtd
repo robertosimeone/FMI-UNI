@@ -1,0 +1,38 @@
+<!ELEMENT catalog (regions,rivers,placements)>
+<!ELEMENT regions (region+)>
+<!ELEMENT region EMPTY>
+<!ATTLIST region id ID #REQUIRED
+				 name CDATA #REQUIRED>
+<!ELEMENT rivers (river+)>
+<!ELEMENT river EMPTY>
+<!ATTLIST river
+				id ID #REQUIRED
+				name CDATA #REQUIRED>
+<!ELEMENT placements (placement+)>
+<!ELEMENT placement (dam+)>
+<!ATTLIST placement
+				regionID IDREF #REQUIRED>
+<!ELEMENT dam (title,mainInfo,image,damWall?,traits,populatedPlace,riverTributaries?,nearPlace?)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT mainInfo (#PCDATA)>
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+				href ENTITY #REQUIRED>
+<!ELEMENT damWall (type,height?,length?)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT height (#PCDATA)>
+<!ELEMENT length (#PCDATA)>
+<!ELEMENT traits (length,volume,year,altitude?,width?)>
+<!ELEMENT volume (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT altitude (#PCDATA)>
+<!ELEMENT width (#PCDATA)>
+<!ELEMENT populatedPlace (#PCDATA)>
+<!ELEMENT riverTributaries (riverTributary+)>
+<!ELEMENT riverTributary (#PCDATA)>
+<!ATTLIST riverTributary
+						riverID IDREF #REQUIRED>
+<!ELEMENT nearPlace (title,distance,description,image)>
+<!ELEMENT distance (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!NOTATION jpg PUBLIC "jpg viewer">
