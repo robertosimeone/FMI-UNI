@@ -130,8 +130,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-debug",
-		"source" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks"
+		"build" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks/cmake-build-debug",
+		"source" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks"
 	},
 	"version" : 
 	{

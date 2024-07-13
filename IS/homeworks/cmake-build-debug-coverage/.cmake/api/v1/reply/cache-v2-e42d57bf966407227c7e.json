@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-debug"
+			"value" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks/cmake-build-debug-coverage"
 		},
 		{
 			"name" : "CLionHomeworks_IS_TOP_LEVEL",
@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks"
+			"value" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-debug"
+			"value" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks/cmake-build-debug-coverage"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -195,7 +195,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-fprofile-instr-generate -fcoverage-mapping"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS_DEBUG",
@@ -291,7 +291,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : ""
+			"value" : "-fprofile-instr-generate -fcoverage-mapping"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS_DEBUG",
@@ -551,7 +551,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks"
+			"value" : "/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",

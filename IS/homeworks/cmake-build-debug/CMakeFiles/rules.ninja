@@ -213,7 +213,7 @@ rule CXX_EXECUTABLE_LINKER__fifth_homework_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks -B/Users/robertborisov/UNI/IS/homeworks/CLionHomeworks/cmake-build-debug
+  command = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks -B/Users/robertborisov/git_repos/FMI-UNI/IS/homeworks/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

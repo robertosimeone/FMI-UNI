@@ -33,12 +33,7 @@ bool binarySearch(int arr[],int element,int size) {
 }
 int main() {
 
-int arr[] = {1,2,10,12,15,17};
-int size = sizeof (arr)/sizeof(arr[0]) ;
-if(binarySearch(arr,17,size))
-    cout << "Found it";
-else
-    cout << "not found";
+cout << "Helo";
 
 
 
